@@ -1,8 +1,8 @@
 # Implementation Plan - Build React IDV Frontend
 
 ## Phase 1: Project Scaffolding & Setup
-- [ ] Task: Initialize React project using Vite in a new `frontend` directory.
-- [ ] Task: Install core dependencies (MUI, `react-webcam`, `axios`).
+- [x] Task: Initialize React project using Vite in a new `frontend` directory. 4dc6bbb
+- [~] Task: Install core dependencies (MUI, `react-webcam`, `axios`).
 - [ ] Task: Set up basic routing and theme configuration.
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Project Scaffolding' (Protocol in workflow.md)
 
