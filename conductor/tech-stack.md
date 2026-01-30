@@ -9,12 +9,12 @@
 - **DeepFace**: Core facial recognition and attribute analysis framework.
 - **FastAPI (Python)**: High-performance framework for exposing DeepFace capabilities as a microservice.
 - **Express.js (Node.js)**: Orchestration layer for managing requests, authentication, and integration with the IDV workflow.
-- **TensorFlow / Keras**: Underlying deep learning engines for DeepFace models.
+- **TensorFlow / Keras (CPU-only)**: Underlying deep learning engines, specifically configured for CPU execution to ensure compatibility with standard hosting environments.
 
 ## Deployment & Infrastructure
-- **Railway.com**: Primary hosting platform, utilizing Nixpacks or Docker for deployment.
+- **Railway.com**: Primary hosting platform.
+- **CPU-Optimized**: System is designed to run efficiently on standard CPU instances without requiring GPU acceleration.
 - **Docker**: Containerization for consistent environments between development and production.
-- **GitHub Actions**: Automated CI/CD for testing and deployment.
 
 ## Data & Storage (Ephemeral Focused)
 - **MongoDB**: Used for session management and optional verification metadata (non-biometric).

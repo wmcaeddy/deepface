@@ -10,6 +10,7 @@ Implement a FastAPI-based service to provide face verification capabilities usin
   - Decode Base64 images to OpenCV format.
   - Call `DeepFace.verify` with configurable model (default: VGG-Face).
   - Normalize the distance metric to a 0-100% confidence score.
+- **Hardware Constraints**: Must be fully functional on CPU-only environments; no GPU required.
 - **Output**: JSON response with verification status and confidence score.
 - **Privacy**: No images or embeddings stored on disk (ephemeral processing).
 - **Deployment**: Must include configurations for Railway.com (e.g., Dockerfile or Nixpacks).
