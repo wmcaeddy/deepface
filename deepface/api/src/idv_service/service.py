@@ -1,6 +1,7 @@
 from typing import Any, Dict
 import numpy as np
 from deepface import DeepFace
+from deepface.api.src.idv_service.utils import normalize_confidence
 
 class VerificationService:
     # pylint: disable=too-few-public-methods
@@ -38,4 +39,11 @@ class VerificationService:
             **{k: v for k, v in kwargs.items()
                if k not in ["model_name", "detector_backend", "enforce_detection", "align"]}
         )
+
+        # Ensure confidence is normalized according to IDV requirements
+        if "confidence" not in result or result["confidence"] is None:
+            result["confidence"] = normalize_confidence(
+                result["distance"], result["threshold"]
+            )
+
         return result

@@ -29,3 +29,24 @@ def decode_image(data_uri: str) -> np.ndarray:
         return img
     except Exception as e:
         raise ValueError(f"Invalid base64 data: {str(e)}") from e
+
+def normalize_confidence(distance: float, threshold: float) -> float:
+    """
+    Normalizes a distance metric to a 0-100% confidence score.
+    A distance equal to the threshold results in 50% confidence.
+    Args:
+        distance (float): The distance between two face embeddings.
+        threshold (float): The threshold for the distance metric.
+    Returns:
+        float: Normalized confidence score (0-100).
+    """
+    if distance <= 0:
+        return 100.0
+
+    # If distance is at threshold, confidence is 50%
+    # If distance is 0, confidence is 100%
+    # If distance is 2*threshold, confidence is 0%
+
+    confidence = (1 - (distance / (2 * threshold))) * 100
+
+    return float(max(0.0, min(100.0, round(confidence, 2))))

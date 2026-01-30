@@ -32,7 +32,28 @@ class TestIdvApiService(unittest.TestCase):
         
         self.assertTrue(result["verified"])
         self.assertEqual(result["distance"], 0.1)
+        self.assertTrue(50 < result["confidence"] <= 100)
         mock_verify.assert_called_once()
+
+    @patch("deepface.DeepFace.verify")
+    def test_verify_images_normalization_fallback(self, mock_verify):
+        from deepface.api.src.idv_service.service import VerificationService
+        
+        # Mock response from DeepFace.verify WITHOUT confidence
+        mock_verify.return_value = {
+            "verified": True,
+            "distance": 0.2,
+            "threshold": 0.4
+        }
+
+        img1 = np.zeros((100, 100, 3), dtype=np.uint8)
+        img2 = np.zeros((100, 100, 3), dtype=np.uint8)
+        
+        service = VerificationService()
+        result = service.verify(img1, img2)
+        
+        # (1 - (0.2 / (2 * 0.4))) * 100 = (1 - 0.25) * 100 = 75
+        self.assertEqual(result["confidence"], 75.0)
 
     def test_verify_images_import_error(self):
         try:
