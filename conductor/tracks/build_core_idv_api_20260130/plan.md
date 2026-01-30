@@ -15,8 +15,8 @@
 
 ## Phase 3: Testing & Integration
 - [x] Task: Write unit tests for image decoding. c8e6b86
-- [~] Task: Write integration tests for the `POST /verify` endpoint using sample images.
-- [ ] Task: Verify non-interactive error handling for invalid inputs.
+- [x] Task: Write integration tests for the `POST /verify` endpoint using sample images. 445a579
+- [~] Task: Verify non-interactive error handling for invalid inputs.
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Testing & Integration' (Protocol in workflow.md)
 
 ## Phase 4: Deployment Readiness
