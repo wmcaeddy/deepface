@@ -19,7 +19,7 @@
 - [x] Task: Verify non-interactive error handling for invalid inputs. 2a847a7
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Testing & Integration' (Protocol in workflow.md) 221975a
 
-## Phase 4: Deployment Readiness
+## Phase 4: Deployment Readiness [checkpoint: eee08ef]
 - [x] Task: Create/Update Dockerfile to support the new FastAPI service. ca389c8
 - [x] Task: Add Railway.com specific configurations (e.g., `railway.json` or environment variable templates). ca389c8
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Deployment Readiness' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Deployment Readiness' (Protocol in workflow.md) eee08ef
