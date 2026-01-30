@@ -14,8 +14,8 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Core Verification Logic' (Protocol in workflow.md) fc7db3c
 
 ## Phase 3: Testing & Integration
-- [ ] Task: Write unit tests for image decoding.
-- [ ] Task: Write integration tests for the `POST /verify` endpoint using sample images.
+- [x] Task: Write unit tests for image decoding. c8e6b86
+- [~] Task: Write integration tests for the `POST /verify` endpoint using sample images.
 - [ ] Task: Verify non-interactive error handling for invalid inputs.
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Testing & Integration' (Protocol in workflow.md)
 
