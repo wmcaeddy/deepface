@@ -1,0 +1,8 @@
+{
+  "track_id": "build_core_idv_api_20260130",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-01-30T00:44:51Z",
+  "updated_at": "2026-01-30T00:44:51Z",
+  "description": "Build the core IDV Web API: Implement a FastAPI-based Python service that exposes a non-interactive endpoint for face verification designed for deployment on Railway.com."
+}
