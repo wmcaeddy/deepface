@@ -20,6 +20,6 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Testing & Integration' (Protocol in workflow.md) 221975a
 
 ## Phase 4: Deployment Readiness
-- [ ] Task: Create/Update Dockerfile to support the new FastAPI service.
-- [ ] Task: Add Railway.com specific configurations (e.g., `railway.json` or environment variable templates).
+- [x] Task: Create/Update Dockerfile to support the new FastAPI service. ca389c8
+- [x] Task: Add Railway.com specific configurations (e.g., `railway.json` or environment variable templates). ca389c8
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: Deployment Readiness' (Protocol in workflow.md)
