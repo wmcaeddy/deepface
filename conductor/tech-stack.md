@@ -4,12 +4,16 @@
 - **Python 3.9+**: Primary language for the DeepFace engine and FastAPI service.
 - **Node.js (LTS)**: Runtime for the orchestration layer and main API server.
 - **TypeScript**: Used for the Node.js layer to ensure type safety and maintainability.
+- **React (TypeScript)**: Framework for the responsive web frontend.
 
 ## Frameworks & Libraries
 - **DeepFace**: Core facial recognition and attribute analysis framework.
 - **FastAPI (Python)**: High-performance framework for exposing DeepFace capabilities as a microservice.
 - **Express.js (Node.js)**: Orchestration layer for managing requests, authentication, and integration with the IDV workflow.
 - **TensorFlow / Keras (CPU-only)**: Underlying deep learning engines, specifically configured for CPU execution to ensure compatibility with standard hosting environments.
+- **Vite**: Build tool and development server for the React frontend.
+- **Material UI (MUI)**: Component library for the frontend UI.
+- **react-webcam**: Library for live camera capture in the browser.
 
 ## Deployment & Infrastructure
 - **Railway.com**: Primary hosting platform.

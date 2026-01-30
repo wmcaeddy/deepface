@@ -17,6 +17,7 @@ The goal is to build a web-based Identity Verification (IDV) system, similar to 
 ## Key Features
 - **Face Verification:** High-accuracy comparison between a reference image (ID card) and a live selfie using DeepFace models (VGG-Face, Facenet, etc.).
 - **Hybrid Backend:** A Node.js/TypeScript Express server for orchestration and a FastAPI Python service for heavy lifting with DeepFace.
+- **React Frontend:** A responsive, Material UI-based web interface for capturing ID photos and live selfies.
 - **Non-Interactive CLI:** Robust command-line interface for managing the system without manual prompts.
 - **Base64 Image Support:** Handling of data-URI images directly from frontend capture components.
 - **Confidence Scoring:** Normalized matching scores to provide pass/fail results.
