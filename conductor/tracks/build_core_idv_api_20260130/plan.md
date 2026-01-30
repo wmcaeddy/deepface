@@ -4,10 +4,10 @@
 - [x] Task: Set up FastAPI project structure in a new directory (e.g., `deepface/api/src/idv_service`). 41ceae0
 - [x] Task: Create \`requirements.txt\` specific to the API dependencies (FastAPI, uvicorn, python-multipart). d53ce56
 - [x] Task: Implement basic FastAPI application with health check endpoint. 97c48a8
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Foundation & Environment' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Foundation & Environment' (Protocol in workflow.md) c8e6b86
 
 ## Phase 2: Core Verification Logic
-- [ ] Task: Implement image decoding utility for Base64 Data URIs.
+- [x] Task: Implement image decoding utility for Base64 Data URIs. c8e6b86
 - [ ] Task: Create verification service layer wrapping `DeepFace.verify`.
 - [ ] Task: Implement confidence score normalization logic.
 - [ ] Task: Create `POST /verify` endpoint.
