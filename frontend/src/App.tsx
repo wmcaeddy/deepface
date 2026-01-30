@@ -7,10 +7,15 @@ import {
   StepLabel, 
   Typography, 
   Button, 
-  Paper 
+  Paper,
+  LinearProgress,
+  Alert,
+  AlertTitle
 } from '@mui/material'
 import ReferencePhotoCapture from './components/ReferencePhotoCapture'
 import SelfieCapture from './components/SelfieCapture'
+import ResultsDashboard from './components/ResultsDashboard'
+import { verifyImages, VerifyResponse } from './api'
 
 const steps = ['Reference Photo', 'Take Selfie', 'Results'];
 
@@ -18,28 +23,69 @@ function App() {
   const [activeStep, setActiveStep] = useState(0);
   const [referenceImage, setReferenceImage] = useState<string | null>(null);
   const [selfieImage, setSelfieImage] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [result, setResult] = useState<VerifyResponse | null>(null);
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  const handleNext = async () => {
+    if (activeStep === steps.length - 1) {
+      // Trigger Verification on final step
+      await performVerification();
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
+  };
+
+  const performVerification = async () => {
+    if (!referenceImage || !selfieImage) return;
+    
+    setLoading(true);
+    setError(null);
+    try {
+      const data = await verifyImages(referenceImage, selfieImage);
+      setResult(data);
+      setActiveStep((prev) => prev + 1);
+    } catch (err: any) {
+      const msg = err.response?.data?.detail?.error || err.message || "An unexpected error occurred during verification.";
+      setError(msg);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setError(null);
   };
 
   const handleReset = () => {
     setActiveStep(0);
     setReferenceImage(null);
     setSelfieImage(null);
+    setResult(null);
+    setError(null);
   };
 
   const isNextDisabled = () => {
     if (activeStep === 0 && !referenceImage) return true;
     if (activeStep === 1 && !selfieImage) return true;
+    if (loading) return true;
     return false;
   };
 
   const renderStepContent = (step: number) => {
+    if (loading) {
+      return (
+        <Box sx={{ textAlign: 'center', py: 8 }}>
+          <Typography variant="h6" gutterBottom>Analyzing Biometrics...</Typography>
+          <Typography variant="body2" color="textSecondary" sx={{ mb: 4 }}>
+            Comparing reference photo with live selfie using VGG-Face model.
+          </Typography>
+          <LinearProgress />
+        </Box>
+      );
+    }
+
     switch (step) {
       case 0:
         return (
@@ -94,15 +140,28 @@ function App() {
           ))}
         </Stepper>
 
+        {error && (
+          <Alert severity="error" sx={{ mb: 3 }} onClose={() => setError(null)}>
+            <AlertTitle>Verification Error</AlertTitle>
+            {error}
+          </Alert>
+        )}
+
         <Paper variant="outlined" sx={{ p: { xs: 2, md: 4 } }}>
           {activeStep === steps.length ? (
-            <Box sx={{ textAlign: 'center' }}>
-              <Typography variant="h5" gutterBottom>
-                Verification Process Complete
-              </Typography>
-              <Button onClick={handleReset} sx={{ mt: 2 }}>
-                Start New Verification
-              </Button>
+            <Box>
+              {result && (
+                <ResultsDashboard 
+                  result={result} 
+                  referenceImage={referenceImage!} 
+                  selfieImage={selfieImage!} 
+                />
+              )}
+              <Box sx={{ textAlign: 'center', mt: 4 }}>
+                <Button variant="outlined" onClick={handleReset}>
+                  Start New Verification
+                </Button>
+              </Box>
             </Box>
           ) : (
             <Box>
@@ -111,7 +170,7 @@ function App() {
               </Box>
               
               <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 4 }}>
-                {activeStep !== 0 && (
+                {activeStep !== 0 && !loading && (
                   <Button onClick={handleBack} sx={{ mr: 1 }}>
                     Back
                   </Button>
