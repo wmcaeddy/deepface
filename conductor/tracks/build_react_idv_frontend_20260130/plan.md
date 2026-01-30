@@ -1,10 +1,10 @@
 # Implementation Plan - Build React IDV Frontend
 
-## Phase 1: Project Scaffolding & Setup
+## Phase 1: Project Scaffolding & Setup [checkpoint: 353e3e4]
 - [x] Task: Initialize React project using Vite in a new `frontend` directory. 4dc6bbb
 - [x] Task: Install core dependencies (MUI, `react-webcam`, `axios`). 8de333e
 - [x] Task: Set up basic routing and theme configuration. ef171ba
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Project Scaffolding' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Project Scaffolding' (Protocol in workflow.md) 353e3e4
 
 ## Phase 2: Capture Components
 - [ ] Task: Implement `ReferencePhotoCapture` component with file upload support.
