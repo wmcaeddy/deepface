@@ -61,3 +61,24 @@ class TestIdvApiIntegration(unittest.TestCase):
         self.assertIn("confidence", data)
         # img1 and img3 are usually different persons
         self.assertFalse(data["verified"])
+
+    def test_verify_integration_error_handling(self) -> None:
+        """Test error handling with invalid base64."""
+        payload = {
+            "img1": "invalid-base64",
+            "img2": "invalid-base64"
+        }
+        response = self.client.post("/verify", json=payload)
+        self.assertEqual(response.status_code, 400)
+        data = response.json()
+        self.assertIn("detail", data)
+        self.assertIn("error", data["detail"])
+
+    def test_verify_integration_missing_fields(self) -> None:
+        """Test error handling with missing fields."""
+        payload = {
+            "img1": "some-data"
+        }
+        response = self.client.post("/verify", json=payload)
+        # FastAPI returns 422 Unprocessable Entity for missing required fields in Pydantic models
+        self.assertEqual(response.status_code, 422)
