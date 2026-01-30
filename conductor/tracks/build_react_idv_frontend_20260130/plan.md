@@ -3,7 +3,7 @@
 ## Phase 1: Project Scaffolding & Setup
 - [x] Task: Initialize React project using Vite in a new `frontend` directory. 4dc6bbb
 - [x] Task: Install core dependencies (MUI, `react-webcam`, `axios`). 8de333e
-- [~] Task: Set up basic routing and theme configuration.
+- [x] Task: Set up basic routing and theme configuration. ef171ba
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Project Scaffolding' (Protocol in workflow.md)
 
 ## Phase 2: Capture Components
