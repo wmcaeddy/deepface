@@ -10,7 +10,9 @@ import {
   Paper,
   LinearProgress,
   Alert,
-  AlertTitle
+  AlertTitle,
+  useMediaQuery,
+  useTheme
 } from '@mui/material'
 import axios from 'axios'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -29,6 +31,9 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<VerifyResponse | null>(null);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleNext = async () => {
     if (activeStep === steps.length - 1) {
@@ -135,12 +140,12 @@ function App() {
 
   return (
     <Container maxWidth="md">
-      <Box sx={{ my: 8 }}>
-        <Typography variant="h4" align="center" gutterBottom color="primary">
+      <Box sx={{ my: { xs: 4, md: 8 } }}>
+        <Typography variant="h4" align="center" gutterBottom color="primary" sx={{ fontWeight: 'bold' }}>
           DeepFace Identity Verification
         </Typography>
         
-        <Stepper activeStep={activeStep} sx={{ py: 4 }}>
+        <Stepper activeStep={activeStep} orientation={isMobile ? 'vertical' : 'horizontal'} sx={{ py: 4 }}>
           {steps.map((label) => (
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
