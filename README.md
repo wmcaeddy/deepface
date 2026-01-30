@@ -455,7 +455,23 @@ Please cite deepface in your publications if it helps your research.
 
 Also, if you use deepface in your GitHub projects, please add `deepface` in the `requirements.txt`.
 
-## Licence
+## Identity Verification (IDV) System
+
+This project now includes a production-ready IDV system with a Python backend and a React frontend.
+
+### Backend (FastAPI)
+Exposes DeepFace capabilities via a REST API.
+- **Path**: `deepface/api/src/idv_service`
+- **Port**: 8080
+- **Command**: `venv/bin/uvicorn deepface.api.src.idv_service.app:app --host 0.0.0.0 --port 8080`
+
+### Frontend (React)
+Professional user interface for the verification flow.
+- **Path**: `frontend/`
+- **Port**: 5173 (Dev)
+- **Command**: `cd frontend && npm install && npm run dev`
+
+## License
 
 DeepFace is licensed under the MIT License - see [`LICENSE`](https://github.com/serengil/deepface/blob/master/LICENSE) for more details.
 
