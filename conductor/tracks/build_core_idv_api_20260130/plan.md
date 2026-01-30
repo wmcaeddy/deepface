@@ -6,12 +6,12 @@
 - [x] Task: Implement basic FastAPI application with health check endpoint. 97c48a8
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Foundation & Environment' (Protocol in workflow.md) c8e6b86
 
-## Phase 2: Core Verification Logic
+## Phase 2: Core Verification Logic [checkpoint: fc7db3c]
 - [x] Task: Implement image decoding utility for Base64 Data URIs. c8e6b86
 - [x] Task: Create verification service layer wrapping `DeepFace.verify`. 99192a8
 - [x] Task: Implement confidence score normalization logic. 8cf2c64
 - [x] Task: Create `POST /verify` endpoint. 207654f
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Core Verification Logic' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Core Verification Logic' (Protocol in workflow.md) fc7db3c
 
 ## Phase 3: Testing & Integration
 - [ ] Task: Write unit tests for image decoding.
