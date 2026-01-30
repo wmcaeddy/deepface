@@ -13,11 +13,11 @@
 - [x] Task: Create `POST /verify` endpoint. 207654f
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Core Verification Logic' (Protocol in workflow.md) fc7db3c
 
-## Phase 3: Testing & Integration
+## Phase 3: Testing & Integration [checkpoint: 221975a]
 - [x] Task: Write unit tests for image decoding. c8e6b86
 - [x] Task: Write integration tests for the `POST /verify` endpoint using sample images. 445a579
 - [x] Task: Verify non-interactive error handling for invalid inputs. 2a847a7
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Testing & Integration' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Testing & Integration' (Protocol in workflow.md) 221975a
 
 ## Phase 4: Deployment Readiness
 - [ ] Task: Create/Update Dockerfile to support the new FastAPI service.
