@@ -8,8 +8,8 @@
 
 ## Phase 2: Core Verification Logic
 - [x] Task: Implement image decoding utility for Base64 Data URIs. c8e6b86
-- [ ] Task: Create verification service layer wrapping `DeepFace.verify`.
-- [ ] Task: Implement confidence score normalization logic.
+- [x] Task: Create verification service layer wrapping `DeepFace.verify`. 99192a8
+- [~] Task: Implement confidence score normalization logic.
 - [ ] Task: Create `POST /verify` endpoint.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Core Verification Logic' (Protocol in workflow.md)
 
