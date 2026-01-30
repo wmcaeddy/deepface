@@ -7,8 +7,8 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Project Scaffolding' (Protocol in workflow.md) 353e3e4
 
 ## Phase 2: Capture Components
-- [ ] Task: Implement `ReferencePhotoCapture` component with file upload support.
-- [ ] Task: Implement `SelfieCapture` component using `react-webcam`.
+- [x] Task: Implement `ReferencePhotoCapture` component with file upload support. b31d697
+- [~] Task: Implement `SelfieCapture` component using `react-webcam`.
 - [ ] Task: Create a unified state management for the verification wizard.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Capture Components' (Protocol in workflow.md)
 
