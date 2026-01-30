@@ -8,8 +8,8 @@
 
 ## Phase 2: Capture Components
 - [x] Task: Implement `ReferencePhotoCapture` component with file upload support. b31d697
-- [~] Task: Implement `SelfieCapture` component using `react-webcam`.
-- [ ] Task: Create a unified state management for the verification wizard.
+- [x] Task: Implement `SelfieCapture` component using `react-webcam`. b2c9014
+- [~] Task: Create a unified state management for the verification wizard.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Capture Components' (Protocol in workflow.md)
 
 ## Phase 3: API Integration & Results
