@@ -19,7 +19,7 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 3: API Integration' (Protocol in workflow.md) aae800b
 
 ## Phase 4: Refinement & Polishing
-- [ ] Task: Add animations and transitions between wizard steps.
-- [ ] Task: Ensure mobile responsiveness and touch-friendly controls.
+- [x] Task: Add animations and transitions between wizard steps. a38020b
+- [~] Task: Ensure mobile responsiveness and touch-friendly controls.
 - [ ] Task: Finalize documentation and deployment scripts.
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: Refinement' (Protocol in workflow.md)
