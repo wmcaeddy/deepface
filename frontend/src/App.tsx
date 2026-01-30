@@ -10,7 +10,7 @@ import {
   Paper 
 } from '@mui/material'
 
-const steps = ['Upload ID', 'Take Selfie', 'Results'];
+const steps = ['Reference Photo', 'Take Selfie', 'Results'];
 
 function App() {
   const [activeStep, setActiveStep] = useState(0);
