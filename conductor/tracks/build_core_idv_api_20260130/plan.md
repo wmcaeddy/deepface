@@ -2,7 +2,7 @@
 
 ## Phase 1: Foundation & Environment
 - [x] Task: Set up FastAPI project structure in a new directory (e.g., `deepface/api/src/idv_service`). 41ceae0
-- [ ] Task: Create `requirements.txt` specific to the API dependencies (FastAPI, uvicorn, python-multipart).
+- [x] Task: Create \`requirements.txt\` specific to the API dependencies (FastAPI, uvicorn, python-multipart). d53ce56
 - [ ] Task: Implement basic FastAPI application with health check endpoint.
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Foundation & Environment' (Protocol in workflow.md)
 
