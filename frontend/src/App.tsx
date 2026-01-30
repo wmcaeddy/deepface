@@ -13,6 +13,7 @@ import {
   AlertTitle
 } from '@mui/material'
 import axios from 'axios'
+import { motion, AnimatePresence } from 'framer-motion'
 import ReferencePhotoCapture from './components/ReferencePhotoCapture'
 import SelfieCapture from './components/SelfieCapture'
 import ResultsDashboard from './components/ResultsDashboard'
@@ -154,44 +155,54 @@ function App() {
           </Alert>
         )}
 
-        <Paper variant="outlined" sx={{ p: { xs: 2, md: 4 } }}>
-          {activeStep === steps.length ? (
-            <Box>
-              {result && (
-                <ResultsDashboard 
-                  result={result} 
-                  referenceImage={referenceImage!} 
-                  selfieImage={selfieImage!} 
-                />
+        <Paper variant="outlined" sx={{ p: { xs: 2, md: 4 }, overflow: 'hidden' }}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeStep + (loading ? '-loading' : '')}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              {activeStep === steps.length ? (
+                <Box>
+                  {result && (
+                    <ResultsDashboard 
+                      result={result} 
+                      referenceImage={referenceImage!} 
+                      selfieImage={selfieImage!} 
+                    />
+                  )}
+                  <Box sx={{ textAlign: 'center', mt: 4 }}>
+                    <Button variant="outlined" onClick={handleReset}>
+                      Start New Verification
+                    </Button>
+                  </Box>
+                </Box>
+              ) : (
+                <Box>
+                  <Box sx={{ minHeight: '350px' }}>
+                    {renderStepContent(activeStep)}
+                  </Box>
+                  
+                  <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 4 }}>
+                    {activeStep !== 0 && !loading && (
+                      <Button onClick={handleBack} sx={{ mr: 1 }}>
+                        Back
+                      </Button>
+                    )}
+                    <Button
+                      variant="contained"
+                      onClick={handleNext}
+                      disabled={isNextDisabled()}
+                    >
+                      {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                    </Button>
+                  </Box>
+                </Box>
               )}
-              <Box sx={{ textAlign: 'center', mt: 4 }}>
-                <Button variant="outlined" onClick={handleReset}>
-                  Start New Verification
-                </Button>
-              </Box>
-            </Box>
-          ) : (
-            <Box>
-              <Box sx={{ minHeight: '350px' }}>
-                {renderStepContent(activeStep)}
-              </Box>
-              
-              <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 4 }}>
-                {activeStep !== 0 && !loading && (
-                  <Button onClick={handleBack} sx={{ mr: 1 }}>
-                    Back
-                  </Button>
-                )}
-                <Button
-                  variant="contained"
-                  onClick={handleNext}
-                  disabled={isNextDisabled()}
-                >
-                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                </Button>
-              </Box>
-            </Box>
-          )}
+            </motion.div>
+          </AnimatePresence>
         </Paper>
       </Box>
     </Container>
