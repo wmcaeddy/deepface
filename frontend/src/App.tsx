@@ -1,34 +1,83 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { 
+  Container, 
+  Box, 
+  Stepper, 
+  Step, 
+  StepLabel, 
+  Typography, 
+  Button, 
+  Paper 
+} from '@mui/material'
+
+const steps = ['Upload ID', 'Take Selfie', 'Results'];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [activeStep, setActiveStep] = useState(0);
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Container maxWidth="md">
+      <Box sx={{ my: 8 }}>
+        <Typography variant="h4" align="center" gutterBottom color="primary">
+          DeepFace Identity Verification
+        </Typography>
+        
+        <Stepper activeStep={activeStep} sx={{ py: 4 }}>
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+
+        <Paper variant="outlined" sx={{ p: { xs: 2, md: 4 } }}>
+          {activeStep === steps.length ? (
+            <Box sx={{ textAlign: 'center' }}>
+              <Typography variant="h5" gutterBottom>
+                Verification Process Complete
+              </Typography>
+              <Button onClick={handleReset} sx={{ mt: 2 }}>
+                Start New Verification
+              </Button>
+            </Box>
+          ) : (
+            <Box>
+              <Box sx={{ minHeight: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Typography variant="body1">
+                  Placeholder for: {steps[activeStep]}
+                </Typography>
+              </Box>
+              
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 4 }}>
+                {activeStep !== 0 && (
+                  <Button onClick={handleBack} sx={{ mr: 1 }}>
+                    Back
+                  </Button>
+                )}
+                <Button
+                  variant="contained"
+                  onClick={handleNext}
+                >
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                </Button>
+              </Box>
+            </Box>
+          )}
+        </Paper>
+      </Box>
+    </Container>
   )
 }
 
