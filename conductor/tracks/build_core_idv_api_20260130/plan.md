@@ -1,6 +1,6 @@
 # Implementation Plan - Build the core IDV Web API
 
-## Phase 1: Foundation & Environment
+## Phase 1: Foundation & Environment [checkpoint: d534460]
 - [x] Task: Set up FastAPI project structure in a new directory (e.g., `deepface/api/src/idv_service`). 41ceae0
 - [x] Task: Create \`requirements.txt\` specific to the API dependencies (FastAPI, uvicorn, python-multipart). d53ce56
 - [x] Task: Implement basic FastAPI application with health check endpoint. 97c48a8
