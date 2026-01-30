@@ -4,5 +4,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Build the core IDV Web API**
+- [~] **Track: Build the core IDV Web API**
   *Link: [./tracks/build_core_idv_api_20260130/](./tracks/build_core_idv_api_20260130/)*
