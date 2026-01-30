@@ -12,11 +12,11 @@
 - [x] Task: Create a unified state management for the verification wizard. 447a53f
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Capture Components' (Protocol in workflow.md) 0c47749
 
-## Phase 3: API Integration & Results
+## Phase 3: API Integration & Results [checkpoint: aae800b]
 - [x] Task: Connect frontend to the FastAPI `/verify` endpoint. 3cc9069
 - [x] Task: Implement `ResultsDashboard` to display verification data. f83e9e8
 - [x] Task: Add error handling and loading states for API calls. 12d341c
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: API Integration' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: API Integration' (Protocol in workflow.md) aae800b
 
 ## Phase 4: Refinement & Polishing
 - [ ] Task: Add animations and transitions between wizard steps.
