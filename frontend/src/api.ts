@@ -7,6 +7,15 @@ const api = axios.create({
   },
 });
 
+export interface FacialArea {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  left_eye: [number, number] | null;
+  right_eye: [number, number] | null;
+}
+
 export interface VerifyResponse {
   verified: boolean;
   distance: number;
@@ -16,8 +25,8 @@ export interface VerifyResponse {
   detector_backend: string;
   similarity_metric: string;
   facial_areas: {
-    img1: any;
-    img2: any;
+    img1: FacialArea;
+    img2: FacialArea;
   };
   time: number;
 }

@@ -12,10 +12,12 @@ import {
   Alert,
   AlertTitle
 } from '@mui/material'
+import axios from 'axios'
 import ReferencePhotoCapture from './components/ReferencePhotoCapture'
 import SelfieCapture from './components/SelfieCapture'
 import ResultsDashboard from './components/ResultsDashboard'
-import { verifyImages, VerifyResponse } from './api'
+import { verifyImages } from './api'
+import type { VerifyResponse } from './api'
 
 const steps = ['Reference Photo', 'Take Selfie', 'Results'];
 
@@ -45,8 +47,13 @@ function App() {
       const data = await verifyImages(referenceImage, selfieImage);
       setResult(data);
       setActiveStep((prev) => prev + 1);
-    } catch (err: any) {
-      const msg = err.response?.data?.detail?.error || err.message || "An unexpected error occurred during verification.";
+    } catch (err: unknown) {
+      let msg = "An unexpected error occurred during verification.";
+      if (axios.isAxiosError(err)) {
+        msg = err.response?.data?.detail?.error || err.message;
+      } else if (err instanceof Error) {
+        msg = err.message;
+      }
       setError(msg);
     } finally {
       setLoading(false);
