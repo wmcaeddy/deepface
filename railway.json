@@ -1,0 +1,13 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "dockerfilePath": "Dockerfile.idv"
+  },
+  "deploy": {
+    "startCommand": "uvicorn deepface.api.src.idv_service.app:app --host 0.0.0.0 --port $PORT",
+    "healthcheckPath": "/health",
+    "healthcheckTimeout": 300,
+    "restartPolicyType": "ON_FAILURE",
+    "numReplicas": 1
+  }
+}

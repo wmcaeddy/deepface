@@ -1,0 +1,41 @@
+# base image
+FROM python:3.10-slim
+LABEL org.opencontainers.image.source https://github.com/serengil/deepface
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    ffmpeg \
+    libsm6 \
+    libxext6 \
+    libhdf5-dev \
+    gcc \
+    python3-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# switch to application directory
+WORKDIR /app
+
+# Copy required files
+COPY ./deepface /app/deepface
+COPY ./requirements.txt /app/requirements.txt
+COPY ./requirements_local /app/requirements_local
+COPY ./package_info.json /app/
+COPY ./setup.py /app/
+COPY ./README.md /app/
+
+# Install deepface and its dependencies
+RUN pip install --no-cache-dir -r /app/requirements_local
+RUN pip install --no-cache-dir -e .
+
+# Install IDV specific requirements
+COPY ./deepface/api/src/idv_service/requirements.txt /app/idv_requirements.txt
+RUN pip install --no-cache-dir -r /app/idv_requirements.txt
+RUN pip install --no-cache-dir tf-keras
+
+# Environment variables
+ENV PYTHONUNBUFFERED=1
+ENV PORT=8080
+
+# Run the app
+EXPOSE 8080
+CMD ["uvicorn", "deepface.api.src.idv_service.app:app", "--host", "0.0.0.0", "--port", "8080"]
