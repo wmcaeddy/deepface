@@ -1,11 +1,16 @@
 from typing import Any, Dict
 from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from deepface.api.src.idv_service.service import VerificationService
 from deepface.api.src.idv_service.utils import decode_image
 
 app = FastAPI(title="DeepFace IDV API")
 verification_service = VerificationService()
+
+# Serve static files
+app.mount("/static", StaticFiles(directory="deepface/api/src/idv_service/static"), name="static")
 
 class VerifyRequest(BaseModel):
     img1: str
@@ -21,7 +26,25 @@ async def health_check() -> Dict[str, str]:
 
 
 
+@app.get("/")
+
+
+
+async def root() -> FileResponse:
+
+
+
+    return FileResponse("deepface/api/src/idv_service/static/index.html")
+
+
+
+
+
+
+
 @app.post("/verify")
+
+
 
 async def verify(request: VerifyRequest) -> Dict[str, Any]:
 
