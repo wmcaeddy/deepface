@@ -4,8 +4,7 @@ import {
   Box, 
   Button, 
   Typography, 
-  Paper, 
-  IconButton 
+  Paper 
 } from '@mui/material';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import ReplayIcon from '@mui/icons-material/Replay';
