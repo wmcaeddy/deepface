@@ -58,8 +58,8 @@ function App() {
       if (axios.isAxiosError(err)) {
         const errorDetail = err.response?.data?.detail?.error;
         if (typeof errorDetail === 'string') {
-          if (errorDetail.includes("Face could not be detected")) {
-            msg = "Face detection failed. Please ensure your face is clearly visible and within the frame in both photos.";
+          if (errorDetail.includes("Face could not be detected") || errorDetail.includes("Exception while processing")) {
+            msg = "Face detection failed. Please ensure faces are clearly visible, well-lit, and fully within the frame in both photos.";
           } else if (errorDetail.includes("image size")) {
             msg = "One of the images is too large. Please use a smaller photo.";
           } else {
