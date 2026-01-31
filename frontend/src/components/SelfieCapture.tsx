@@ -1,10 +1,11 @@
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
 import Webcam from 'react-webcam';
 import { 
   Box, 
   Button, 
   Typography, 
-  Paper 
+  Paper,
+  Fade
 } from '@mui/material';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import ReplayIcon from '@mui/icons-material/Replay';
@@ -23,6 +24,7 @@ const videoConstraints = {
 const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }) => {
   const webcamRef = useRef<Webcam>(null);
   const [imgSrc, setImgSrc] = useState<string | null>(initialImage || null);
+  const [countdown, setCountdown] = useState<number | null>(null);
 
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current?.getScreenshot();
@@ -31,6 +33,21 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
       onCapture(imageSrc);
     }
   }, [webcamRef, onCapture]);
+
+  const startCountdown = () => {
+    setCountdown(3);
+  };
+
+  useEffect(() => {
+    if (countdown === null) return;
+    if (countdown === 0) {
+      capture();
+      setCountdown(null);
+      return;
+    }
+    const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [countdown, capture]);
 
   const retake = () => {
     setImgSrc(null);
@@ -42,7 +59,7 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
         Take a Selfie
       </Typography>
       <Typography variant="body2" color="textSecondary" sx={{ mb: 3 }}>
-        Position your face within the frame and click capture.
+        Position your face within the oval and wait for the countdown.
       </Typography>
 
       <Paper 
@@ -63,13 +80,55 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
             style={{ width: '100%', borderRadius: '4px' }} 
           />
         ) : (
-          <Webcam
-            audio={false}
-            ref={webcamRef}
-            screenshotFormat="image/jpeg"
-            videoConstraints={videoConstraints}
-            style={{ width: '100%', borderRadius: '4px' }}
-          />
+          <Box sx={{ position: 'relative' }}>
+            <Webcam
+              audio={false}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              videoConstraints={videoConstraints}
+              style={{ width: '100%', borderRadius: '4px' }}
+            />
+            {/* Face Oval Guide */}
+            <Box
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '60%',
+                height: '80%',
+                border: '3px dashed rgba(255, 255, 255, 0.6)',
+                borderRadius: '50% / 50%',
+                pointerEvents: 'none',
+                boxShadow: '0 0 0 1000px rgba(0, 0, 0, 0.3)',
+              }}
+            />
+            {/* Countdown Overlay */}
+            {countdown !== null && (
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  zIndex: 10,
+                }}
+              >
+                <Fade in={true} key={countdown}>
+                  <Typography 
+                    variant="h1" 
+                    sx={{ 
+                      color: 'white', 
+                      fontWeight: 'bold',
+                      textShadow: '0 0 20px rgba(0,0,0,0.8)'
+                    }}
+                  >
+                    {countdown > 0 ? countdown : '📸'}
+                  </Typography>
+                </Fade>
+              </Box>
+            )}
+          </Box>
         )}
       </Paper>
 
@@ -87,10 +146,11 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
             variant="contained"
             color="primary"
             startIcon={<CameraAltIcon />}
-            onClick={capture}
+            onClick={startCountdown}
             size="large"
+            disabled={countdown !== null}
           >
-            Capture
+            {countdown !== null ? `Capturing in ${countdown}...` : 'Start Capture'}
           </Button>
         )}
       </Box>
