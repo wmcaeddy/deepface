@@ -7,9 +7,9 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Local Automation' (Protocol in workflow.md) dfd31af
 
 ## Phase 2: UX Refinements (Capture & Feedback)
-- [ ] Task: Enhance `SelfieCapture` component with visual guides.
-    - [ ] Add CSS overlay for "face oval" guide over the webcam feed.
-    - [ ] Implement a 3-second countdown timer before capture.
+- [x] Task: Enhance `SelfieCapture` component with visual guides. fc90454
+    - [x] Add CSS overlay for "face oval" guide over the webcam feed.
+    - [x] Implement a 3-second countdown timer before capture.
 - [ ] Task: Update `ResultsDashboard` for clear visual feedback.
     - [ ] Style success/failure states with MUI colors/icons.
     - [ ] Map API error codes to user-friendly messages.
