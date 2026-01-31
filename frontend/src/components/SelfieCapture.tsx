@@ -30,6 +30,7 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
   const [error, setError] = useState<string | null>(null);
   const [isCapturing, setIsCapturing] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [loadTimeout, setLoadTimeout] = useState(false);
 
   const isSecureContext = window.isSecureContext;
 
@@ -41,6 +42,18 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
       locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/${file}`,
     }),
   });
+
+  // Handle loading timeout
+  useEffect(() => {
+    if (isLoading) {
+      const timer = setTimeout(() => {
+        setLoadTimeout(true);
+      }, 15000); // 15 seconds timeout
+      return () => clearTimeout(timer);
+    } else {
+      setLoadTimeout(false);
+    }
+  }, [isLoading]);
 
   const capture = useCallback(() => {
     // Access the actual webcam instance from the ref provided by the hook
@@ -101,11 +114,51 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
     setProgress(0);
   };
 
+  const handleManualCapture = () => {
+    // Fallback to manual capture if AI fails to load
+    // @ts-ignore
+    const webcam = webcamRef?.current as Webcam | null;
+    const imageSrc = webcam?.getScreenshot();
+    if (imageSrc) {
+      setImgSrc(imageSrc);
+      onCapture(imageSrc);
+    }
+  };
+
   return (
     <Box sx={{ textAlign: 'center' }}>
       <Typography variant="h6" gutterBottom>
         Take a Selfie
       </Typography>
+
+      {loadTimeout && !imgSrc && (
+        <Alert severity="warning" sx={{ mb: 2, textAlign: 'left' }}>
+          <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }}>
+            AI Model Loading is taking longer than expected.
+          </Typography>
+          <Typography variant="body2" sx={{ mt: 1 }}>
+            This can happen due to slow network or browser restrictions. You can try to refresh or use manual capture below.
+          </Typography>
+          <Button 
+            variant="outlined" 
+            color="warning" 
+            size="small" 
+            onClick={() => window.location.reload()}
+            sx={{ mt: 1, mr: 1 }}
+          >
+            Refresh Page
+          </Button>
+          <Button 
+            variant="contained" 
+            color="warning" 
+            size="small" 
+            onClick={handleManualCapture}
+            sx={{ mt: 1 }}
+          >
+            Manual Capture
+          </Button>
+        </Alert>
+      )}
 
       {!isSecureContext && (
         <Alert severity="error" sx={{ mb: 2, textAlign: 'left' }}>
@@ -167,6 +220,7 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
           <Box sx={{ position: 'absolute', zIndex: 5, textAlign: 'center', color: 'white' }}>
             <CircularProgress color="inherit" sx={{ mb: 2 }} />
             <Typography variant="body2">Loading AI Models...</Typography>
+            <Typography variant="caption" sx={{ opacity: 0.7 }}>This may take a moment on the first load</Typography>
           </Box>
         )}
 
@@ -186,7 +240,7 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
               onUserMediaError={handleUserMediaError}
               style={{ width: '100%', borderRadius: '4px' }}
             />
-            {!error && !isLoading && (
+            {!error && (!isLoading || loadTimeout) && (
               <>
                 {/* Face Oval Guide */}
                 <Box
@@ -224,7 +278,7 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
                   >
                     <Typography 
                       variant="h1" 
-                      sx={{
+                      sx={{ 
                         color: 'white', 
                         fontWeight: 'bold',
                         textShadow: '0 0 20px rgba(0,0,0,0.8)'
@@ -255,9 +309,10 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
             color={detected ? "success" : "primary"}
             startIcon={<CameraAltIcon />}
             size="large"
-            disabled={true}
+            disabled={!loadTimeout || isLoading}
+            onClick={handleManualCapture}
           >
-            {isLoading ? "Initializing..." : detected ? "Capturing..." : "Waiting for Face..."}
+            {isLoading ? "Initializing AI..." : detected ? "Capturing..." : "Waiting for Face..."}
           </Button>
         )}
       </Box>
