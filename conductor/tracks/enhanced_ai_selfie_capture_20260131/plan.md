@@ -15,9 +15,9 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 2: AI Logic' (Protocol in workflow.md) fc373b0
 
 ## Phase 3: UI/UX Enhancements
-- [ ] Task: Update the visual guide (Smart Oval).
-    - [ ] Bind oval border color to the `detected` state (Gray -> Green).
-    - [ ] Add a pulsing animation during the stability countdown.
-- [ ] Task: Add real-time status messages.
-    - [ ] Display "Face Detected" and "Hold Steady" prompts based on AI state.
+- [x] Task: Update the visual guide (Smart Oval). e69a772
+    - [x] Bind oval border color to the `detected` state (Gray -> Green).
+    - [x] Add a pulsing animation during the stability countdown.
+- [x] Task: Add real-time status messages. e69a772
+    - [x] Display "Face Detected" and "Hold Steady" prompts based on AI state.
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: AI UI' (Protocol in workflow.md)
