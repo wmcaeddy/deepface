@@ -26,6 +26,9 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
   const webcamRef = useRef<Webcam>(null);
   const [imgSrc, setImgSrc] = useState<string | null>(initialImage || null);
   const [countdown, setCountdown] = useState<number | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const isSecureContext = window.isSecureContext;
 
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current?.getScreenshot();
@@ -35,7 +38,17 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
     }
   }, [webcamRef, onCapture]);
 
+  const handleUserMediaError = useCallback((err: string | DOMException) => {
+    console.error("Webcam error:", err);
+    if (!isSecureContext) {
+      setError("Camera access requires a Secure Context (HTTPS or localhost). Since you are accessing via a network IP, your browser has blocked the camera.");
+    } else {
+      setError("Could not access camera. Please ensure you have granted permission and no other application is using it.");
+    }
+  }, [isSecureContext]);
+
   const startCountdown = () => {
+    setError(null);
     setCountdown(3);
   };
 
@@ -52,6 +65,7 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
 
   const retake = () => {
     setImgSrc(null);
+    setError(null);
   };
 
   return (
@@ -60,16 +74,40 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
         Take a Selfie
       </Typography>
 
-      <Alert severity="warning" sx={{ mb: 3, textAlign: 'left' }}>
-        <Typography variant="body2">
-          <strong>Live Capture Instructions:</strong>
-          <ul>
-            <li>Center your face within the dashed oval guide.</li>
-            <li>Look directly at the camera and keep a neutral expression.</li>
-            <li>Wait for the 3-second countdown to finish.</li>
-          </ul>
-        </Typography>
-      </Alert>
+      {!isSecureContext && (
+        <Alert severity="error" sx={{ mb: 2, textAlign: 'left' }}>
+          <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>
+            Insecure Origin Detected: Browser blocks camera access
+          </Typography>
+          <Typography variant="body2" sx={{ mb: 1 }}>
+            Modern browsers only allow camera access on <code>https://</code> or <code>localhost</code>. 
+            To allow this IP (<code>{window.location.hostname}</code>) in Chrome/Edge:
+          </Typography>
+          <ol style={{ margin: 0, paddingLeft: '20px' }}>
+            <li>Open a new tab and go to: <code>chrome://flags/#unsafely-treat-insecure-origin-as-secure</code></li>
+            <li>Enable the flag.</li>
+            <li>Add <code>{window.location.origin}</code> to the text area.</li>
+            <li>Relaunch the browser.</li>
+          </ol>
+        </Alert>
+      )}
+
+      {error ? (
+        <Alert severity="error" sx={{ mb: 3, textAlign: 'left' }}>
+          {error}
+        </Alert>
+      ) : (
+        <Alert severity="warning" sx={{ mb: 3, textAlign: 'left' }}>
+          <Typography variant="body2">
+            <strong>Live Capture Instructions:</strong>
+            <ul>
+              <li>Center your face within the dashed oval guide.</li>
+              <li>Look directly at the camera and keep a neutral expression.</li>
+              <li>Wait for the 3-second countdown to finish.</li>
+            </ul>
+          </Typography>
+        </Alert>
+      )}
 
       <Paper 
         variant="outlined" 
@@ -80,7 +118,11 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
           backgroundColor: '#000',
           position: 'relative',
           lineHeight: 0,
-          borderRadius: 4
+          borderRadius: 4,
+          minHeight: '200px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
         }}
       >
         {imgSrc ? (
@@ -90,53 +132,58 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
             style={{ width: '100%', borderRadius: '4px' }} 
           />
         ) : (
-          <Box sx={{ position: 'relative' }}>
+          <Box sx={{ position: 'relative', width: '100%' }}>
             <Webcam
               audio={false}
               ref={webcamRef}
               screenshotFormat="image/jpeg"
               videoConstraints={videoConstraints}
+              onUserMediaError={handleUserMediaError}
               style={{ width: '100%', borderRadius: '4px' }}
             />
-            {/* Face Oval Guide */}
-            <Box
-              sx={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '60%',
-                height: '80%',
-                border: '3px dashed rgba(255, 255, 255, 0.6)',
-                borderRadius: '50% / 50%',
-                pointerEvents: 'none',
-                boxShadow: '0 0 0 1000px rgba(0, 0, 0, 0.3)',
-              }}
-            />
-            {/* Countdown Overlay */}
-            {countdown !== null && (
-              <Box
-                sx={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  zIndex: 10,
-                }}
-              >
-                <Fade in={true} key={countdown}>
-                  <Typography 
-                    variant="h1" 
-                    sx={{ 
-                      color: 'white', 
-                      fontWeight: 'bold',
-                      textShadow: '0 0 20px rgba(0,0,0,0.8)'
+            {!error && (
+              <>
+                {/* Face Oval Guide */}
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '60%',
+                    height: '80%',
+                    border: '3px dashed rgba(255, 255, 255, 0.6)',
+                    borderRadius: '50% / 50%',
+                    pointerEvents: 'none',
+                    boxShadow: '0 0 0 1000px rgba(0, 0, 0, 0.3)',
+                  }}
+                />
+                {/* Countdown Overlay */}
+                {countdown !== null && (
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      zIndex: 10,
                     }}
                   >
-                    {countdown > 0 ? countdown : '📸'}
-                  </Typography>
-                </Fade>
-              </Box>
+                    <Fade in={true} key={countdown}>
+                      <Typography 
+                        variant="h1" 
+                        sx={{ 
+                          color: 'white', 
+                          fontWeight: 'bold',
+                          textShadow: '0 0 20px rgba(0,0,0,0.8)'
+                        }}
+                      >
+                        {countdown > 0 ? countdown : '📸'}
+                      </Typography>
+                    </Fade>
+                  </Box>
+                )}
+              </>
             )}
           </Box>
         )}
@@ -158,7 +205,7 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
             startIcon={<CameraAltIcon />}
             onClick={startCountdown}
             size="large"
-            disabled={countdown !== null}
+            disabled={countdown !== null || !!error}
           >
             {countdown !== null ? `Capturing in ${countdown}...` : 'Start Capture'}
           </Button>
