@@ -1,9 +1,9 @@
 # Implementation Plan - Enhanced AI Selfie Capture
 
-## Phase 1: Dependency Integration
+## Phase 1: Dependency Integration [checkpoint: ee1592a]
 - [x] Task: Install AI detection dependencies. fac504a
     - [x] Run `npm install @mediapipe/face_detection @tensorflow/tfjs-core @tensorflow/tfjs-backend-webgl react-use-face-detection` in the `frontend` directory.
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Dependencies' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Dependencies' (Protocol in workflow.md) ee1592a
 
 ## Phase 2: AI Detection Logic
 - [ ] Task: Integrate `useFaceDetection` hook into `SelfieCapture.tsx`.
