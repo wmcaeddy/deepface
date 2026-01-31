@@ -12,7 +12,7 @@
 - [x] Task: Implement Auto-Capture state machine. ebd5ce6
     - [x] Create logic to detect "stable" face presence.
     - [x] Add a 1.5s countdown that triggers the existing `capture()` function.
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: AI Logic' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: AI Logic' (Protocol in workflow.md) fc373b0
 
 ## Phase 3: UI/UX Enhancements
 - [ ] Task: Update the visual guide (Smart Oval).
