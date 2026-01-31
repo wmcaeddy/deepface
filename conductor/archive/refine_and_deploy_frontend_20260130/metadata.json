@@ -1,0 +1,8 @@
+{
+  "track_id": "refine_and_deploy_frontend_20260130",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-01-30T10:00:00Z",
+  "updated_at": "2026-01-30T10:00:00Z",
+  "description": "we have setup the backend the api and a simple web interfsce. ensure we have implemented a suitsble ui for user to cerify photo against the selfie, provide me the url to acces this interfsce"
+}
