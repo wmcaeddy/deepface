@@ -8,7 +8,8 @@ import {
   Typography, 
   Paper,
   Alert,
-  CircularProgress
+  CircularProgress,
+  LinearProgress
 } from '@mui/material';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import ReplayIcon from '@mui/icons-material/Replay';
@@ -28,6 +29,7 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
   const [imgSrc, setImgSrc] = useState<string | null>(initialImage || null);
   const [error, setError] = useState<string | null>(null);
   const [isCapturing, setIsCapturing] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   const isSecureContext = window.isSecureContext;
 
@@ -49,6 +51,7 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
       setImgSrc(imageSrc);
       onCapture(imageSrc);
       setIsCapturing(false);
+      setProgress(0);
     }
   }, [webcamRef, onCapture]);
 
@@ -56,16 +59,29 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
   useEffect(() => {
     if (imgSrc || isLoading || !detected) {
       setIsCapturing(false);
+      setProgress(0);
       return;
     }
 
     setIsCapturing(true);
-    const timer = setTimeout(() => {
-      capture();
-    }, 1500);
+    
+    // Animate progress bar over 1.5s
+    const startTime = Date.now();
+    const duration = 1500;
+    
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      const newProgress = Math.min((elapsed / duration) * 100, 100);
+      setProgress(newProgress);
+      
+      if (elapsed >= duration) {
+        clearInterval(interval);
+        capture();
+      }
+    }, 50);
 
     return () => {
-      clearTimeout(timer);
+      clearInterval(interval);
     };
   }, [detected, imgSrc, isLoading, capture]);
 
@@ -82,6 +98,7 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
     setImgSrc(null);
     setError(null);
     setIsCapturing(false);
+    setProgress(0);
   };
 
   return (
@@ -118,10 +135,15 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
             <strong>{detected ? "Face Detected!" : "Live Capture Instructions:"}</strong>
             <ul>
               <li>Center your face within the dashed oval guide.</li>
-              <li>{detected ? <strong>Hold steady for auto-capture...</strong> : "Look directly at the camera and keep a neutral expression."}</li>
+              <li>{detected ? <strong>Hold steady! Capturing...</strong> : "Look directly at the camera and keep a neutral expression."}</li>
               {!detected && <li>The system will automatically capture once you are aligned.</li>}
             </ul>
           </Typography>
+          {isCapturing && (
+            <Box sx={{ width: '100%', mt: 1 }}>
+              <LinearProgress variant="determinate" value={progress} color="success" />
+            </Box>
+          )}
         </Alert>
       )}
 
