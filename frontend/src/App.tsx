@@ -56,7 +56,18 @@ function App() {
     } catch (err: unknown) {
       let msg = "An unexpected error occurred during verification.";
       if (axios.isAxiosError(err)) {
-        msg = err.response?.data?.detail?.error || err.message;
+        const errorDetail = err.response?.data?.detail?.error;
+        if (typeof errorDetail === 'string') {
+          if (errorDetail.includes("Face could not be detected")) {
+            msg = "Face detection failed. Please ensure your face is clearly visible and within the frame in both photos.";
+          } else if (errorDetail.includes("image size")) {
+            msg = "One of the images is too large. Please use a smaller photo.";
+          } else {
+            msg = errorDetail;
+          }
+        } else {
+          msg = err.message;
+        }
       } else if (err instanceof Error) {
         msg = err.message;
       }

@@ -4,7 +4,8 @@ import {
   Button, 
   Typography, 
   Paper, 
-  styled 
+  styled,
+  Alert
 } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
@@ -46,9 +47,17 @@ const ReferencePhotoCapture: React.FC<ReferencePhotoCaptureProps> = ({ onCapture
       <Typography variant="h6" gutterBottom>
         Upload Reference Photo
       </Typography>
-      <Typography variant="body2" color="textSecondary" sx={{ mb: 3 }}>
-        Please upload a clear photo of the person you want to verify.
-      </Typography>
+      
+      <Alert severity="info" sx={{ mb: 3, textAlign: 'left' }}>
+        <Typography variant="body2">
+          <strong>Guidelines for a successful verification:</strong>
+          <ul>
+            <li>Use a clear, front-facing portrait (like a passport photo).</li>
+            <li>Ensure there is good lighting and a neutral background.</li>
+            <li>Avoid wearing sunglasses or hats.</li>
+          </ul>
+        </Typography>
+      </Alert>
 
       <Paper 
         variant="outlined" 
@@ -60,7 +69,8 @@ const ReferencePhotoCapture: React.FC<ReferencePhotoCaptureProps> = ({ onCapture
           alignItems: 'center', 
           justifyContent: 'center',
           backgroundColor: '#fafafa',
-          borderStyle: 'dashed'
+          borderStyle: 'dashed',
+          borderRadius: 4
         }}
       >
         {preview ? (

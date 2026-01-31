@@ -5,7 +5,8 @@ import {
   Button, 
   Typography, 
   Paper,
-  Fade
+  Fade,
+  Alert
 } from '@mui/material';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import ReplayIcon from '@mui/icons-material/Replay';
@@ -58,9 +59,17 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
       <Typography variant="h6" gutterBottom>
         Take a Selfie
       </Typography>
-      <Typography variant="body2" color="textSecondary" sx={{ mb: 3 }}>
-        Position your face within the oval and wait for the countdown.
-      </Typography>
+
+      <Alert severity="warning" sx={{ mb: 3, textAlign: 'left' }}>
+        <Typography variant="body2">
+          <strong>Live Capture Instructions:</strong>
+          <ul>
+            <li>Center your face within the dashed oval guide.</li>
+            <li>Look directly at the camera and keep a neutral expression.</li>
+            <li>Wait for the 3-second countdown to finish.</li>
+          </ul>
+        </Typography>
+      </Alert>
 
       <Paper 
         variant="outlined" 
@@ -70,7 +79,8 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
           overflow: 'hidden', 
           backgroundColor: '#000',
           position: 'relative',
-          lineHeight: 0
+          lineHeight: 0,
+          borderRadius: 4
         }}
       >
         {imgSrc ? (
