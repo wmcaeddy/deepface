@@ -1,10 +1,10 @@
 # Implementation Plan - Refine and Deploy React IDV Frontend
 
-## Phase 1: Local Automation & Access
+## Phase 1: Local Automation & Access [checkpoint: dfd31af]
 - [x] Task: Create `scripts/start-dev.sh` to launch Backend and Frontend non-interactively. d8f938d
     - [x] Create script to check/install dependencies, start backend (bg), start frontend (bg), and wait.
     - [x] Ensure script prints the final access URL (http://localhost:5173).
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Local Automation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Local Automation' (Protocol in workflow.md) dfd31af
 
 ## Phase 2: UX Refinements (Capture & Feedback)
 - [ ] Task: Enhance `SelfieCapture` component with visual guides.
