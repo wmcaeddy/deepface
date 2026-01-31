@@ -1,4 +1,12 @@
-# base image
+# Build Stage
+FROM node:20-alpine as build
+WORKDIR /frontend
+COPY ./frontend/package*.json ./
+RUN npm ci
+COPY ./frontend/ .
+RUN npm run build
+
+# Runtime Stage
 FROM python:3.10-slim
 LABEL org.opencontainers.image.source https://github.com/serengil/deepface
 
@@ -31,6 +39,9 @@ RUN pip install --no-cache-dir -e .
 COPY ./deepface/api/src/idv_service/requirements.txt /app/idv_requirements.txt
 RUN pip install --no-cache-dir -r /app/idv_requirements.txt
 RUN pip install --no-cache-dir tf-keras
+
+# Copy built frontend assets to static directory
+COPY --from=build /frontend/dist /app/deepface/api/src/idv_service/static
 
 # Environment variables
 ENV PYTHONUNBUFFERED=1
