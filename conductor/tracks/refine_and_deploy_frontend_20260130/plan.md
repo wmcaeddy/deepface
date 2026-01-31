@@ -1,9 +1,9 @@
 # Implementation Plan - Refine and Deploy React IDV Frontend
 
 ## Phase 1: Local Automation & Access
-- [~] Task: Create `scripts/start-dev.sh` to launch Backend and Frontend non-interactively.
-    - [ ] Create script to check/install dependencies, start backend (bg), start frontend (bg), and wait.
-    - [ ] Ensure script prints the final access URL (http://localhost:5173).
+- [x] Task: Create `scripts/start-dev.sh` to launch Backend and Frontend non-interactively. d8f938d
+    - [x] Create script to check/install dependencies, start backend (bg), start frontend (bg), and wait.
+    - [x] Ensure script prints the final access URL (http://localhost:5173).
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Local Automation' (Protocol in workflow.md)
 
 ## Phase 2: UX Refinements (Capture & Feedback)
