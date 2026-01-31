@@ -27,10 +27,10 @@ BACKEND_PID=$!
 echo "Backend started (PID: $BACKEND_PID). Logs: backend.log"
 
 # 2. Start Frontend
-echo "Starting React Frontend on port 5173..."
+echo "Starting React Frontend on port 5173 (Network Exposed)..."
 cd frontend
 # npm install > /dev/null 2>&1 # Optional: auto-install
-npm run dev > ../frontend.log 2>&1 &
+npm run dev -- --host > ../frontend.log 2>&1 &
 FRONTEND_PID=$!
 cd ..
 echo "Frontend started (PID: $FRONTEND_PID). Logs: frontend.log"
@@ -38,10 +38,13 @@ echo "Frontend started (PID: $FRONTEND_PID). Logs: frontend.log"
 # 3. Wait a moment for services to initialize
 sleep 5
 
+# Detect Local IP
+LOCAL_IP=$(hostname -I | awk '{print $1}')
+
 echo "---------------------------------------------------"
 echo "IDV System is running!"
-echo "Backend: http://localhost:8080"
-echo "Frontend: http://localhost:5173"
+echo "Local:   http://localhost:5173"
+echo "Network: http://$LOCAL_IP:5173"
 echo "---------------------------------------------------"
 echo "Press Ctrl+C to stop."
 
