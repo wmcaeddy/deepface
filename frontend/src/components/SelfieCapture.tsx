@@ -1,12 +1,14 @@
-import React, { useRef, useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import Webcam from 'react-webcam';
+import { useFaceDetection } from 'react-use-face-detection/build/index';
+import * as FaceDetection from '@mediapipe/face_detection';
 import { 
   Box, 
   Button, 
   Typography, 
   Paper,
-  Fade,
-  Alert
+  Alert,
+  CircularProgress
 } from '@mui/material';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import ReplayIcon from '@mui/icons-material/Replay';
@@ -23,20 +25,49 @@ const videoConstraints = {
 };
 
 const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }) => {
-  const webcamRef = useRef<Webcam>(null);
   const [imgSrc, setImgSrc] = useState<string | null>(initialImage || null);
-  const [countdown, setCountdown] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isCapturing, setIsCapturing] = useState(false);
 
   const isSecureContext = window.isSecureContext;
 
+  const { webcamRef, detected, isLoading } = useFaceDetection({
+    faceDetectionOptions: {
+      model: 'short',
+    },
+    faceDetection: new FaceDetection.FaceDetection({
+      locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/${file}`,
+    }),
+  });
+
   const capture = useCallback(() => {
-    const imageSrc = webcamRef.current?.getScreenshot();
+    // Access the actual webcam instance from the ref provided by the hook
+    // @ts-ignore - webcamRef can be a callback ref or RefObject
+    const webcam = webcamRef?.current as Webcam | null;
+    const imageSrc = webcam?.getScreenshot();
     if (imageSrc) {
       setImgSrc(imageSrc);
       onCapture(imageSrc);
+      setIsCapturing(false);
     }
   }, [webcamRef, onCapture]);
+
+  // Auto-capture logic
+  useEffect(() => {
+    if (imgSrc || isLoading || !detected) {
+      setIsCapturing(false);
+      return;
+    }
+
+    setIsCapturing(true);
+    const timer = setTimeout(() => {
+      capture();
+    }, 1500);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [detected, imgSrc, isLoading, capture]);
 
   const handleUserMediaError = useCallback((err: string | DOMException) => {
     console.error("Webcam error:", err);
@@ -47,25 +78,10 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
     }
   }, [isSecureContext]);
 
-  const startCountdown = () => {
-    setError(null);
-    setCountdown(3);
-  };
-
-  useEffect(() => {
-    if (countdown === null) return;
-    if (countdown === 0) {
-      capture();
-      setCountdown(null);
-      return;
-    }
-    const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
-    return () => clearTimeout(timer);
-  }, [countdown, capture]);
-
   const retake = () => {
     setImgSrc(null);
     setError(null);
+    setIsCapturing(false);
   };
 
   return (
@@ -97,13 +113,13 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
           {error}
         </Alert>
       ) : (
-        <Alert severity="warning" sx={{ mb: 3, textAlign: 'left' }}>
+        <Alert severity={detected ? "success" : "warning"} sx={{ mb: 3, textAlign: 'left' }}>
           <Typography variant="body2">
-            <strong>Live Capture Instructions:</strong>
+            <strong>{detected ? "Face Detected!" : "Live Capture Instructions:"}</strong>
             <ul>
               <li>Center your face within the dashed oval guide.</li>
-              <li>Look directly at the camera and keep a neutral expression.</li>
-              <li>Wait for the 3-second countdown to finish.</li>
+              <li>{detected ? <strong>Hold steady for auto-capture...</strong> : "Look directly at the camera and keep a neutral expression."}</li>
+              {!detected && <li>The system will automatically capture once you are aligned.</li>}
             </ul>
           </Typography>
         </Alert>
@@ -125,6 +141,13 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
           justifyContent: 'center'
         }}
       >
+        {isLoading && !imgSrc && (
+          <Box sx={{ position: 'absolute', zIndex: 5, textAlign: 'center', color: 'white' }}>
+            <CircularProgress color="inherit" sx={{ mb: 2 }} />
+            <Typography variant="body2">Loading AI Models...</Typography>
+          </Box>
+        )}
+
         {imgSrc ? (
           <img 
             src={imgSrc} 
@@ -132,7 +155,7 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
             style={{ width: '100%', borderRadius: '4px' }} 
           />
         ) : (
-          <Box sx={{ position: 'relative', width: '100%' }}>
+          <Box sx={{ position: 'relative', width: '100%', opacity: isLoading ? 0.3 : 1 }}>
             <Webcam
               audio={false}
               ref={webcamRef}
@@ -141,7 +164,7 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
               onUserMediaError={handleUserMediaError}
               style={{ width: '100%', borderRadius: '4px' }}
             />
-            {!error && (
+            {!error && !isLoading && (
               <>
                 {/* Face Oval Guide */}
                 <Box
@@ -152,14 +175,22 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
                     transform: 'translate(-50%, -50%)',
                     height: '75%',
                     aspectRatio: '3 / 4',
-                    border: '3px dashed rgba(255, 255, 255, 0.6)',
+                    border: '3px dashed',
+                    borderColor: isCapturing ? 'success.main' : 'rgba(255, 255, 255, 0.6)',
                     borderRadius: '50% / 50%',
                     pointerEvents: 'none',
                     boxShadow: '0 0 0 1000px rgba(0, 0, 0, 0.3)',
+                    transition: 'border-color 0.2s',
+                    animation: isCapturing ? 'pulse 1.5s infinite' : 'none',
+                    '@keyframes pulse': {
+                      '0%': { opacity: 1 },
+                      '50%': { opacity: 0.5 },
+                      '100%': { opacity: 1 },
+                    },
                   }}
                 />
-                {/* Countdown Overlay */}
-                {countdown !== null && (
+                
+                {isCapturing && (
                   <Box
                     sx={{
                       position: 'absolute',
@@ -169,18 +200,16 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
                       zIndex: 10,
                     }}
                   >
-                    <Fade in={true} key={countdown}>
-                      <Typography 
-                        variant="h1" 
-                        sx={{ 
-                          color: 'white', 
-                          fontWeight: 'bold',
-                          textShadow: '0 0 20px rgba(0,0,0,0.8)'
-                        }}
-                      >
-                        {countdown > 0 ? countdown : '📸'}
-                      </Typography>
-                    </Fade>
+                    <Typography 
+                      variant="h1" 
+                      sx={{
+                        color: 'white', 
+                        fontWeight: 'bold',
+                        textShadow: '0 0 20px rgba(0,0,0,0.8)'
+                      }}
+                    >
+                      📸
+                    </Typography>
                   </Box>
                 )}
               </>
@@ -201,13 +230,12 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
         ) : (
           <Button
             variant="contained"
-            color="primary"
+            color={detected ? "success" : "primary"}
             startIcon={<CameraAltIcon />}
-            onClick={startCountdown}
             size="large"
-            disabled={countdown !== null || !!error}
+            disabled={true}
           >
-            {countdown !== null ? `Capturing in ${countdown}...` : 'Start Capture'}
+            {isLoading ? "Initializing..." : detected ? "Capturing..." : "Waiting for Face..."}
           </Button>
         )}
       </Box>
