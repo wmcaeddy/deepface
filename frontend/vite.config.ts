@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
+    allowedHosts: ['deepface.magi-3.com'],
     proxy: {
       '/verify': 'http://localhost:8080',
       '/health': 'http://localhost:8080',
