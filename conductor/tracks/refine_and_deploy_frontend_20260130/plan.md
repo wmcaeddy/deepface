@@ -19,6 +19,6 @@
 - [x] Task: Configure production build for Frontend. f79580a
     - [x] Update `vite.config.ts` if needed for production builds.
     - [x] Create/Update `Dockerfile` or `nixpacks.toml` to serve the React build (e.g., using Nginx or serving static files via FastAPI).
-- [ ] Task: Create non-interactive deployment script.
-    - [ ] Implement `scripts/deploy.sh` using Railway CLI to create/update the project and deploy without prompts.
+- [x] Task: Create non-interactive deployment script. 7978c69
+    - [x] Implement `scripts/deploy.sh` using Railway CLI to create/update the project and deploy without prompts.
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Railway Deployment' (Protocol in workflow.md)
