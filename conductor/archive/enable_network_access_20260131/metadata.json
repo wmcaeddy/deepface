@@ -1,0 +1,8 @@
+{
+  "track_id": "enable_network_access_20260131",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-01-31T03:00:00Z",
+  "updated_at": "2026-01-31T03:00:00Z",
+  "description": "Enable local network access for other devices to use the IDV system."
+}
