@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
     libsm6 \
     libxext6 \
     libhdf5-dev \
+    libgl1 \
     gcc \
     python3-dev \
     && rm -rf /var/lib/apt/lists/*
@@ -49,4 +50,4 @@ ENV PORT=8080
 
 # Run the app
 EXPOSE 8080
-CMD ["uvicorn", "deepface.api.src.idv_service.app:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD uvicorn deepface.api.src.idv_service.app:app --host 0.0.0.0 --port ${PORT:-8080}
