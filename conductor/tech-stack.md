@@ -6,14 +6,11 @@
 - **TypeScript**: Used for the Node.js layer to ensure type safety and maintainability.
 - **React (TypeScript)**: Framework for the responsive web frontend.
 
-## Frameworks & Libraries
-- **DeepFace**: Core facial recognition and attribute analysis framework.
-- **FastAPI (Python)**: High-performance framework for exposing DeepFace capabilities as a microservice.
-- **Express.js (Node.js)**: Orchestration layer for managing requests, authentication, and integration with the IDV workflow.
-- **TensorFlow / Keras (CPU-only)**: Underlying deep learning engines, specifically configured for CPU execution to ensure compatibility with standard hosting environments.
 - **Vite**: Build tool and development server for the React frontend.
 - **Material UI (MUI)**: Component library for the frontend UI.
 - **react-webcam**: Library for live camera capture in the browser.
+- **MediaPipe Face Detection**: Real-time browser-based AI engine for face tracking.
+- **react-use-face-detection**: React hook for integrating AI detection into the webcam flow.
 
 ## Deployment & Infrastructure
 - **Railway.com**: Primary hosting platform.
