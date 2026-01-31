@@ -10,9 +10,9 @@
 - [x] Task: Enhance `SelfieCapture` component with visual guides. fc90454
     - [x] Add CSS overlay for "face oval" guide over the webcam feed.
     - [x] Implement a 3-second countdown timer before capture.
-- [ ] Task: Update `ResultsDashboard` for clear visual feedback.
-    - [ ] Style success/failure states with MUI colors/icons.
-    - [ ] Map API error codes to user-friendly messages.
+- [x] Task: Update `ResultsDashboard` for clear visual feedback. b6c3e08
+    - [x] Style success/failure states with MUI colors/icons.
+    - [x] Map API error codes to user-friendly messages.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: UX Refinements' (Protocol in workflow.md)
 
 ## Phase 3: Railway Deployment Setup
