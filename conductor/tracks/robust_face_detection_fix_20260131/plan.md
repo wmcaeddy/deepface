@@ -8,6 +8,6 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Detection Strategy' (Protocol in workflow.md) 0eeb787
 
 ## Phase 2: Integration & Performance
-- [ ] Task: Verify end-to-end verification flow with difficult images.
-    - [ ] Run automated integration tests `tests/integration/test_idv_api_integration.py`.
+- [x] Task: Verify end-to-end verification flow with difficult images. 5ac58dd
+    - [x] Run automated integration tests `tests/integration/test_idv_api_integration.py`.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Integration' (Protocol in workflow.md)
