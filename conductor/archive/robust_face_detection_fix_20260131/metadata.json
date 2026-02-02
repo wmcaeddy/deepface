@@ -1,0 +1,8 @@
+{
+  "track_id": "robust_face_detection_fix_20260131",
+  "type": "bug",
+  "status": "new",
+  "created_at": "2026-01-31T03:45:00Z",
+  "updated_at": "2026-01-31T03:45:00Z",
+  "description": "after uploading photo and selfie, it shows Verification Error Face detection failed. Please ensure faces are clearly visible, well-lit, and fully within the frame in both photos. fix this"
+}
