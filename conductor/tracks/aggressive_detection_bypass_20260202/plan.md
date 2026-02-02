@@ -7,7 +7,7 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Aggressive Bypass' (Protocol in workflow.md) d40b8d7
 
 ## Phase 2: Frontend UX Refinement
-- [ ] Task: Update error messages and instructions in React.
-    - [ ] Modify `frontend/src/App.tsx` to use softer error messages for mismatches.
-    - [ ] Update `SelfieCapture.tsx` instructions to emphasize positioning.
+- [x] Task: Update error messages and instructions in React. 0cec74c
+    - [x] Modify `frontend/src/App.tsx` to use softer error messages for mismatches.
+    - [x] Update `SelfieCapture.tsx` instructions to emphasize positioning.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: UX Refinement' (Protocol in workflow.md)
