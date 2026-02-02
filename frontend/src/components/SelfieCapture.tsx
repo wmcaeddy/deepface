@@ -187,7 +187,7 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
           <Typography variant="body2">
             <strong>{detected ? "Face Detected!" : "Live Capture Instructions:"}</strong>
             <ul>
-              <li>Center your face within the dashed oval guide.</li>
+              <li>Center your face within the dashed oval guide for an accurate match.</li>
               <li>{detected ? <strong>Hold steady! Capturing...</strong> : "Look directly at the camera and keep a neutral expression."}</li>
               {!detected && <li>The system will automatically capture once you are aligned.</li>}
             </ul>

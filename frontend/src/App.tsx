@@ -58,8 +58,9 @@ function App() {
       if (axios.isAxiosError(err)) {
         const errorDetail = err.response?.data?.detail?.error;
         if (typeof errorDetail === 'string') {
+          // Softened messaging for aggressive bypass strategy
           if (errorDetail.includes("Face could not be detected") || errorDetail.includes("Exception while processing")) {
-            msg = "Face detection failed. Please ensure faces are clearly visible, well-lit, and fully within the frame in both photos.";
+            msg = "Verification failed. Please ensure you are centered, well-lit, and your face is clearly visible in both photos.";
           } else if (errorDetail.includes("image size")) {
             msg = "One of the images is too large. Please use a smaller photo.";
           } else {
