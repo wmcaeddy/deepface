@@ -1,10 +1,10 @@
 # Implementation Plan - Aggressive Detection Bypass
 
-## Phase 1: Backend Logic Update
+## Phase 1: Backend Logic Update [checkpoint: d40b8d7]
 - [x] Task: Simplify `VerificationService.verify` to aggressive bypass. 6ec1fa1
     - [x] Create a unit test `tests/unit/test_aggressive_bypass.py` that verifies the immediate skip on failure.
     - [x] Update `deepface/api/src/idv_service/service.py` to remove `mtcnn` and implement immediate `enforce_detection=False`.
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Aggressive Bypass' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Aggressive Bypass' (Protocol in workflow.md) d40b8d7
 
 ## Phase 2: Frontend UX Refinement
 - [ ] Task: Update error messages and instructions in React.
