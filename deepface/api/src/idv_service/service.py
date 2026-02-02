@@ -14,7 +14,7 @@ class VerificationService:
 
     def verify(self, img1: np.ndarray, img2: np.ndarray, **kwargs: Any) -> Dict[str, Any]:
         """
-        Verifies if two images represent the same person.
+        Verifies if two images represent the same person with an automated detector fallback chain.
         Args:
             img1 (np.ndarray): First image in BGR format.
             img2 (np.ndarray): Second image in BGR format.
@@ -22,7 +22,37 @@ class VerificationService:
         Returns:
             Dict[str, Any]: Verification results.
         """
-        # Set default values if not provided in kwargs
+        # Detection fallback strategy
+        detectors = ["opencv", "mtcnn"]
+        last_error = None
+
+        for detector in detectors:
+            try:
+                print(f"Attempting verification with {detector} detector...")
+                return self._call_verify(img1, img2, detector_backend=detector, enforce_detection=True, **kwargs)
+            except ValueError as e:
+                print(f"Face detection failed with {detector}: {str(e)}")
+                last_error = e
+                continue
+            except Exception as e:
+                print(f"Unexpected error with {detector}: {str(e)}")
+                last_error = e
+                continue
+
+        # Final attempt: Disable enforcement
+        print("All detectors failed. Attempting verification without enforcement...")
+        try:
+            return self._call_verify(img1, img2, detector_backend="opencv", enforce_detection=False, **kwargs)
+        except Exception as e:
+            print(f"Final verification attempt failed: {str(e)}")
+            if last_error:
+                raise last_error from e
+            raise e
+
+    def _call_verify(self, img1: np.ndarray, img2: np.ndarray, **kwargs: Any) -> Dict[str, Any]:
+        """
+        Internal wrapper for DeepFace.verify call.
+        """
         model_name = kwargs.get("model_name", self.model_name)
         detector_backend = kwargs.get("detector_backend", self.detector_backend)
         enforce_detection = kwargs.get("enforce_detection", True)
