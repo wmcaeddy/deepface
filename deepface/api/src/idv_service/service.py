@@ -14,7 +14,7 @@ class VerificationService:
 
     def verify(self, img1: np.ndarray, img2: np.ndarray, **kwargs: Any) -> Dict[str, Any]:
         """
-        Verifies if two images represent the same person with an automated detector fallback chain.
+        Verifies if two images represent the same person with an aggressive detector bypass.
         Args:
             img1 (np.ndarray): First image in BGR format.
             img2 (np.ndarray): Second image in BGR format.
@@ -22,32 +22,19 @@ class VerificationService:
         Returns:
             Dict[str, Any]: Verification results.
         """
-        # Detection fallback strategy
-        detectors = ["opencv", "mtcnn"]
-        last_error = None
-
-        for detector in detectors:
-            try:
-                print(f"Attempting verification with {detector} detector...")
-                return self._call_verify(img1, img2, detector_backend=detector, enforce_detection=True, **kwargs)
-            except ValueError as e:
-                print(f"Face detection failed with {detector}: {str(e)}")
-                last_error = e
-                continue
-            except Exception as e:
-                print(f"Unexpected error with {detector}: {str(e)}")
-                last_error = e
-                continue
-
-        # Final attempt: Disable enforcement
-        print("All detectors failed. Attempting verification without enforcement...")
         try:
-            return self._call_verify(img1, img2, detector_backend="opencv", enforce_detection=False, **kwargs)
-        except Exception as e:
-            print(f"Final verification attempt failed: {str(e)}")
-            if last_error:
-                raise last_error from e
-            raise e
+            # 1. Attempt fast initial detection
+            print("Attempting initial verification with opencv detector...")
+            return self._call_verify(img1, img2, detector_backend="opencv", enforce_detection=True, **kwargs)
+        except (ValueError, Exception) as e:
+            # 2. Aggressive Bypass: Immediately retry without enforcement
+            print(f"Initial detection failed or error occurred: {str(e)}")
+            print("Aggressive Bypass: Retrying immediately without face detection enforcement...")
+            try:
+                return self._call_verify(img1, img2, detector_backend="skip", enforce_detection=False, **kwargs)
+            except Exception as final_e:
+                print(f"Final verification attempt failed: {str(final_e)}")
+                raise final_e from e
 
     def _call_verify(self, img1: np.ndarray, img2: np.ndarray, **kwargs: Any) -> Dict[str, Any]:
         """
