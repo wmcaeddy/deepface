@@ -266,17 +266,18 @@ You can find out more about RetinaFace on this [repo](https://github.com/serengi
 
 **Face Anti Spoofing** - [`Demo`](https://youtu.be/UiK1aIjOBlQ)
 
-DeepFace also includes an anti-spoofing analysis module to understand given image is real or fake. To activate this feature, set the `anti_spoofing` argument to True in any DeepFace tasks.
+DeepFace also includes an anti-spoofing analysis module to understand given image is real or fake. This feature is enabled by default in all DeepFace tasks. To deactivate this feature, set the `anti_spoofing` argument to False.
 
 <p align="center"><img src="https://raw.githubusercontent.com/serengil/deepface/master/icon/face-anti-spoofing.jpg" width="40%"></p>
 
 ```python
 # anti spoofing test in face detection
+# it is enabled by default, but you can also pass it explicitly
 face_objs = DeepFace.extract_faces(img_path="dataset/img1.jpg", anti_spoofing = True)
 assert all(face_obj["is_real"] is True for face_obj in face_objs)
 
 # anti spoofing test in real time analysis
-DeepFace.stream(db_path = "C:/database", anti_spoofing = True)
+DeepFace.stream(db_path = "C:/database")
 ```
 
 **Similarity** - [`Demo`](https://youtu.be/1EPoS69fHOc)
