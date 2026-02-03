@@ -85,7 +85,7 @@ def extract_faces(
         normalize_face (boolean): Flag to enable normalization (divide by 255) of the output
             face image output face image normalization (default is True).
 
-        anti_spoofing (boolean): Flag to enable anti spoofing (default is False).
+        anti_spoofing (boolean): Flag to enable anti spoofing (default is True).
 
     Returns:
         results (List[Dict[str, Any]]): A list of dictionaries, where each dictionary contains:

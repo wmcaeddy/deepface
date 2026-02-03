@@ -128,7 +128,7 @@ def verify(
             If left unset, default pre-tuned threshold values will be applied based on the specified
             model name and distance metric (default is None).
 
-        anti_spoofing (boolean): Flag to enable anti spoofing (default is False).
+        anti_spoofing (boolean): Flag to enable anti spoofing (default is True).
 
     Returns:
         result (dict): A dictionary containing verification results with following keys.
@@ -213,7 +213,7 @@ def analyze(
         silent (boolean): Suppress or allow some log messages for a quieter analysis process
             (default is False).
 
-        anti_spoofing (boolean): Flag to enable anti spoofing (default is False).
+        anti_spoofing (boolean): Flag to enable anti spoofing (default is True).
 
     Returns:
         (List[List[Dict[str, Any]]]): A list of analysis results if received batched image,
@@ -348,7 +348,7 @@ def find(
             directory/db files, if set to false, it will ignore any file changes inside the db_path
             (default is True).
 
-        anti_spoofing (boolean): Flag to enable anti spoofing (default is False).
+        anti_spoofing (boolean): Flag to enable anti spoofing (default is True).
 
         credentials (LightDSA or dict): public - private key pair. This will be used to sign
             and verify the integrity of the datastore pickle file. Since pickle files are not safe
@@ -464,7 +464,7 @@ def represent(
             Default is base. Options: base, raw, Facenet, Facenet2018, VGGFace, VGGFace2, ArcFace
             (default is base).
 
-        anti_spoofing (boolean): Flag to enable anti spoofing (default is False).
+        anti_spoofing (boolean): Flag to enable anti spoofing (default is True).
 
         max_faces (int): Set a limit on the number of faces to be processed (default is None).
 
@@ -559,7 +559,7 @@ def stream(
 
         frame_threshold (int): The frame threshold for face recognition (default is 5).
 
-        anti_spoofing (boolean): Flag to enable anti spoofing (default is False).
+        anti_spoofing (boolean): Flag to enable anti spoofing (default is True).
 
         output_path (str): Path to save the output video. (default is None
             If None, no video is saved).
@@ -627,7 +627,7 @@ def extract_faces(
         normalize_face (boolean): Flag to enable normalization (divide by 255) of the output
             face image output face image normalization (default is True).
 
-        anti_spoofing (boolean): Flag to enable anti spoofing (default is False).
+        anti_spoofing (boolean): Flag to enable anti spoofing (default is True).
 
     Returns:
         results (List[Dict[str, Any]]): A list of dictionaries, where each dictionary contains:
@@ -758,7 +758,7 @@ def register(
         expand_percentage (int): expand detected facial area with a percentage (default is 0).
         normalization (string): Normalize the input image before feeding it to the model.
             Options: base, raw, Facenet, Facenet2018, VGGFace, VGGFace2, ArcFace (default is base).
-        anti_spoofing (boolean): Flag to enable anti spoofing (default is False).
+        anti_spoofing (boolean): Flag to enable anti spoofing (default is True).
         database_type (str): Type of database to register identities. Options: 'postgres', 'mongo',
             'weaviate', 'neo4j', 'pgvector', 'pinecone' (default is 'postgres').
         connection_details (dict or str): Connection details for the database.
@@ -835,7 +835,7 @@ def search(
         expand_percentage (int): expand detected facial area with a percentage (default is 0).
         normalization (string): Normalize the input image before feeding it to the model.
             Options: base, raw, Facenet, Facenet2018, VGGFace, VGGFace2, ArcFace (default is base).
-        anti_spoofing (boolean): Flag to enable anti spoofing (default is False).
+        anti_spoofing (boolean): Flag to enable anti spoofing (default is True).
         similarity_search (boolean): If False, performs identity verification and returns images of
             the same person. If True, performs similarity search and returns visually similar faces
             (e.g., celebrity or parental look-alikes). Default is False.

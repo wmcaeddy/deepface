@@ -65,7 +65,7 @@ def analysis(
 
         frame_threshold (int): The frame threshold for face recognition (default is 5).
 
-        anti_spoofing (boolean): Flag to enable anti spoofing (default is False).
+        anti_spoofing (boolean): Flag to enable anti spoofing (default is True).
 
         output_path (str): Path to save the output video. (default is None
             If None, no video is saved).
@@ -360,7 +360,7 @@ def highlight_facial_areas(
         img (np.ndarray): image itself
         faces_coordinates (list): list of face coordinates as tuple with x, y, w and h
             also is_real and antispoof_score keys
-        anti_spoofing (boolean): Flag to enable anti spoofing (default is False).
+        anti_spoofing (boolean): Flag to enable anti spoofing (default is True).
     Returns:
         img (np.ndarray): image with highlighted facial areas
     """

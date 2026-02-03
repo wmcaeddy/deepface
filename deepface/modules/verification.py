@@ -83,7 +83,7 @@ def verify(
             If left unset, default pre-tuned threshold values will be applied based on the specified
             model name and distance metric (default is None).
 
-        anti_spoofing (boolean): Flag to enable anti spoofing (default is False).
+        anti_spoofing (boolean): Flag to enable anti spoofing (default is True).
 
     Returns:
         result (dict): A dictionary containing verification results.
