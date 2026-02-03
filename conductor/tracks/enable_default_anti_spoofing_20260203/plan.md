@@ -6,11 +6,11 @@ This plan details the steps to change the default value of `anti_spoofing` from 
 - [x] Task: Create a baseline test to confirm `anti_spoofing` currently defaults to `False`. (516bc4c)
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Verification of Current Behavior (Baseline)' (Protocol in workflow.md)
 
-## Phase 2: Implementation of Default Changes (Core Library)
+## Phase 2: Implementation of Default Changes (Core Library) [checkpoint: 79df4ea]
 - [x] Task: Update `DeepFace.py` function signatures. (96ad92b)
 - [x] Task: Update underlying module default parameters. (96ad92b)
 - [x] Task: Write TDD tests for new default behavior. (96ad92b)
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Implementation of Default Changes (Core Library)' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Implementation of Default Changes (Core Library)' (Protocol in workflow.md)
 
 ## Phase 3: Documentation Updates
 - [ ] Task: Update Docstrings in `DeepFace.py`.
