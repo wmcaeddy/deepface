@@ -2,12 +2,9 @@
 
 This plan details the steps to change the default value of `anti_spoofing` from `False` to `True` across the DeepFace library and update documentation accordingly, following a TDD and automation-first approach.
 
-## Phase 1: Verification of Current Behavior (Baseline)
+## Phase 1: Verification of Current Behavior (Baseline) [checkpoint: 073bb17]
 - [x] Task: Create a baseline test to confirm `anti_spoofing` currently defaults to `False`. (516bc4c)
-    - [ ] Create `tests/unit/test_default_anti_spoofing_baseline.py`.
-    - [ ] Implement tests calling `DeepFace.extract_faces` and `DeepFace.verify` without the `anti_spoofing` argument.
-    - [ ] Assert that the result does NOT contain `is_real` or `antispoof_score`.
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Verification of Current Behavior (Baseline)' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Verification of Current Behavior (Baseline)' (Protocol in workflow.md)
 
 ## Phase 2: Implementation of Default Changes (Core Library)
 - [ ] Task: Update `DeepFace.py` function signatures.
