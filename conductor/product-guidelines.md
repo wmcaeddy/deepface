@@ -7,6 +7,7 @@
 ## Data Handling & Privacy
 - **Ephemeral Processing:** Biometric data (images and intermediate representations) must be processed in-memory. No raw biometric data should be persisted to disk after a verification request is finalized.
 - **Embedding Security:** If embeddings are generated for internal comparison, they should be treated as sensitive credentials and handled with appropriate memory-safety precautions.
+- **Secure by Default:** Security features like anti-spoofing must be enabled by default at the library level to protect integrators who may not be experts in biometric security.
 
 ## Verification & Scoring Logic
 - **Granular Confidence Percentiles:** The system must return a normalized confidence score (0-100%) for every match. This allows integrating applications to define their own business-logic thresholds (e.g., "Review Required" vs. "Auto-Approve").

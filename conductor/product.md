@@ -13,12 +13,14 @@ The goal is to build a web-based Identity Verification (IDV) system, similar to 
 - **Privacy & Control:** Keep biometric data within a controlled environment (Railway.com infrastructure).
 - **Automation First:** Prioritize non-interactive, CLI-driven commands for setup, deployment, and operation to minimize manual involvement.
 - **API Compatibility:** Maintain an interface compatible with existing frontend implementations (e.g., React with `react-webcam`).
+- **Security by Default:** Ensure core library functions employ active security measures like anti-spoofing without requiring manual configuration.
 
 ## Key Features
 - **Face Verification:** High-accuracy comparison between a reference image (ID card) and a live selfie using DeepFace models (VGG-Face, Facenet, etc.).
 - **Hybrid Backend:** A Node.js/TypeScript Express server for orchestration and a FastAPI Python service for heavy lifting with DeepFace.
 - **React Frontend:** A responsive, Material UI-based web interface for capturing ID photos and live selfies.
 - **AI-Assisted Capture:** Real-time browser-based face detection and auto-capture with an automated bypass to ensure verification results even in difficult lighting conditions.
+- **Integrated Anti-Spoofing:** Default-on active spoofing detection using the FasNet model to distinguish real faces from photos or digital screens.
 - **Non-Interactive CLI:** Robust command-line interface for managing the system without manual prompts.
 - **Base64 Image Support:** Handling of data-URI images directly from frontend capture components.
 - **Confidence Scoring:** Normalized matching scores to provide pass/fail results.

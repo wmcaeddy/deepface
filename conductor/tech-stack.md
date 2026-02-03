@@ -2,6 +2,7 @@
 
 ## Core Languages & Runtimes
 - **Python 3.9+**: Primary language for the DeepFace engine and FastAPI service.
+- **PyTorch**: Used for the anti-spoofing analysis module (FasNet).
 - **Node.js (LTS)**: Runtime for the orchestration layer and main API server.
 - **TypeScript**: Used for the Node.js layer to ensure type safety and maintainability.
 - **React (TypeScript)**: Framework for the responsive web frontend.
