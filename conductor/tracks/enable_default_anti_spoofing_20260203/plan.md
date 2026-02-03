@@ -7,21 +7,9 @@ This plan details the steps to change the default value of `anti_spoofing` from 
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Verification of Current Behavior (Baseline)' (Protocol in workflow.md)
 
 ## Phase 2: Implementation of Default Changes (Core Library)
-- [ ] Task: Update `DeepFace.py` function signatures.
-    - [ ] Modify `verify`, `analyze`, `extract_faces`, `find`, and `stream` in `deepface/DeepFace.py` to set `anti_spoofing: bool = True`.
-- [ ] Task: Update underlying module default parameters.
-    - [ ] Update `deepface/modules/verification.py`.
-    - [ ] Update `deepface/modules/detection.py`.
-    - [ ] Update `deepface/modules/recognition.py`.
-    - [ ] Update `deepface/modules/representation.py`.
-    - [ ] Update `deepface/modules/demography.py`.
-    - [ ] Update `deepface/modules/datastore.py`.
-    - [ ] Update `deepface/modules/streaming.py`.
-- [ ] Task: Write TDD tests for new default behavior.
-    - [ ] Create `tests/unit/test_default_anti_spoofing_enabled.py`.
-    - [ ] Implement tests calling `DeepFace.extract_faces` and `DeepFace.verify` without the `anti_spoofing` argument.
-    - [ ] Assert that the result DOES contain `is_real` and `antispoof_score`.
-    - [ ] Run tests with `CI=true pytest tests/unit/test_default_anti_spoofing_enabled.py` and confirm they pass.
+- [x] Task: Update `DeepFace.py` function signatures. (96ad92b)
+- [x] Task: Update underlying module default parameters. (96ad92b)
+- [x] Task: Write TDD tests for new default behavior. (96ad92b)
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Implementation of Default Changes (Core Library)' (Protocol in workflow.md)
 
 ## Phase 3: Documentation Updates
