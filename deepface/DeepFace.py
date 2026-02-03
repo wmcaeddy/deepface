@@ -84,7 +84,7 @@ def verify(
     normalization: str = "base",
     silent: bool = False,
     threshold: Optional[float] = None,
-    anti_spoofing: bool = False,
+    anti_spoofing: bool = True,
 ) -> Dict[str, Any]:
     """
     Verify if an image pair represents the same person or different persons.
@@ -183,7 +183,7 @@ def analyze(
     align: bool = True,
     expand_percentage: int = 0,
     silent: bool = False,
-    anti_spoofing: bool = False,
+    anti_spoofing: bool = True,
 ) -> Union[List[Dict[str, Any]], List[List[Dict[str, Any]]]]:
     """
     Analyze facial attributes such as age, gender, emotion, and race in the provided image.
@@ -293,7 +293,7 @@ def find(
     normalization: str = "base",
     silent: bool = False,
     refresh_database: bool = True,
-    anti_spoofing: bool = False,
+    anti_spoofing: bool = True,
     batched: bool = False,
     credentials: Optional[Union[LightDSA, Dict[str, Any]]] = None,
 ) -> Union[List[pd.DataFrame], List[List[Dict[str, Any]]]]:
@@ -529,7 +529,7 @@ def stream(
     source: Any = 0,
     time_threshold: int = 5,
     frame_threshold: int = 5,
-    anti_spoofing: bool = False,
+    anti_spoofing: bool = True,
     output_path: Optional[str] = None,
     debug: bool = False,
 ) -> None:
@@ -597,7 +597,7 @@ def extract_faces(
     grayscale: bool = False,
     color_face: str = "rgb",
     normalize_face: bool = True,
-    anti_spoofing: bool = False,
+    anti_spoofing: bool = True,
 ) -> Union[List[Dict[str, Any]], List[List[Dict[str, Any]]]]:
     """
     Extract faces from a given image

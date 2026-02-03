@@ -53,7 +53,7 @@ def extract_faces(
     grayscale: bool = False,
     color_face: str = "rgb",
     normalize_face: bool = True,
-    anti_spoofing: bool = False,
+    anti_spoofing: bool = True,
     max_faces: Optional[int] = None,
 ) -> Union[List[Dict[str, Any]], List[List[Dict[str, Any]]]]:
     """

@@ -28,7 +28,7 @@ def represent(
     align: bool = True,
     expand_percentage: int = 0,
     normalization: str = "base",
-    anti_spoofing: bool = False,
+    anti_spoofing: bool = True,
     max_faces: Optional[int] = None,
     l2_normalize: bool = False,
     minmax_normalize: bool = False,

@@ -43,7 +43,7 @@ def find(
     normalization: str = "base",
     silent: bool = False,
     refresh_database: bool = True,
-    anti_spoofing: bool = False,
+    anti_spoofing: bool = True,
     batched: bool = False,
     credentials: Optional[Union[LightDSA, Dict[str, Any]]] = None,
 ) -> Union[List[pd.DataFrame], List[List[Dict[str, Any]]]]:
@@ -524,7 +524,7 @@ def find_batched(
     align: bool = True,
     threshold: Optional[float] = None,
     normalization: str = "base",
-    anti_spoofing: bool = False,
+    anti_spoofing: bool = True,
     similarity_search: bool = False,
     k: Optional[int] = None,
 ) -> List[List[Dict[str, Any]]]:

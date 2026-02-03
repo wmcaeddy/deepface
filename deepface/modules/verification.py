@@ -36,7 +36,7 @@ def verify(
     normalization: str = "base",
     silent: bool = False,
     threshold: Optional[float] = None,
-    anti_spoofing: bool = False,
+    anti_spoofing: bool = True,
 ) -> Dict[str, Any]:
     """
     Verify if an image pair represents the same person or different persons.
@@ -248,7 +248,7 @@ def __extract_faces_and_embeddings(
     align: bool = True,
     expand_percentage: int = 0,
     normalization: str = "base",
-    anti_spoofing: bool = False,
+    anti_spoofing: bool = True,
 ) -> Tuple[List[List[float]], List[Dict[str, Any]]]:
     """
     Extract facial areas and find corresponding embeddings for given image
