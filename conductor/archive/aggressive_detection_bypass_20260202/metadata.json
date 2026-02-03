@@ -1,0 +1,8 @@
+{
+  "track_id": "aggressive_detection_bypass_20260202",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-02-02T22:30:00Z",
+  "updated_at": "2026-02-02T22:30:00Z",
+  "description": "Implement an aggressive face detection bypass strategy to prevent 'Face detection failed' errors and improve user experience."
+}
