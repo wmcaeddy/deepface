@@ -12,12 +12,10 @@ This plan details the steps to change the default value of `anti_spoofing` from 
 - [x] Task: Write TDD tests for new default behavior. (96ad92b)
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Implementation of Default Changes (Core Library)' (Protocol in workflow.md)
 
-## Phase 3: Documentation Updates
+## Phase 3: Documentation Updates [checkpoint: 6c5168e]
 - [x] Task: Update Docstrings in `DeepFace.py`. (67655eb)
-    - [ ] Revise all parameter descriptions for `anti_spoofing` to state `(default is True)`.
 - [x] Task: Update `README.md`. (77dd315)
-    - [ ] Find the "Face Anti Spoofing" section and update the text to reflect the new default behavior.
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Documentation Updates' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Documentation Updates' (Protocol in workflow.md)
 
 ## Phase 4: Final Validation and Quality Gates
 - [ ] Task: Run full test suite.
