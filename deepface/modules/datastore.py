@@ -68,7 +68,7 @@ def register(
         expand_percentage (int): expand detected facial area with a percentage (default is 0).
         normalization (string): Normalize the input image before feeding it to the model.
             Options: base, raw, Facenet, Facenet2018, VGGFace, VGGFace2, ArcFace (default is base).
-        anti_spoofing (boolean): Flag to enable anti spoofing (default is True).
+        anti_spoofing (boolean): Flag to enable anti spoofing (default is False).
         database_type (str): Type of database to register identities. Options: 'postgres', 'mongo',
             'weaviate', 'neo4j', 'pgvector', 'pinecone' (default is 'postgres').
         connection_details (dict or str): Connection details for the database.
@@ -177,7 +177,7 @@ def search(
         expand_percentage (int): expand detected facial area with a percentage (default is 0).
         normalization (string): Normalize the input image before feeding it to the model.
             Options: base, raw, Facenet, Facenet2018, VGGFace, VGGFace2, ArcFace (default is base).
-        anti_spoofing (boolean): Flag to enable anti spoofing (default is True).
+        anti_spoofing (boolean): Flag to enable anti spoofing (default is False).
         similarity_search (boolean): If False, performs identity verification and returns images of
             the same person. If True, performs similarity search and returns visually similar faces
             (e.g., celebrity or parental look-alikes). Default is False.
@@ -657,7 +657,7 @@ def __get_embeddings(
         expand_percentage (int): expand detected facial area with a percentage (default is 0).
         normalization (string): Normalize the input image before feeding it to the model.
             Options: base, raw, Facenet, Facenet2018, VGGFace, VGGFace2, ArcFace (default is base).
-        anti_spoofing (boolean): Flag to enable anti spoofing (default is True).
+        anti_spoofing (boolean): Flag to enable anti spoofing (default is False).
         return_face (bool): Whether to return the aligned face along with the embedding
             (default is True).
     Returns:

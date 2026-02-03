@@ -97,7 +97,7 @@ def find(
             directory/db files, if set to false, it will ignore any file changes inside the db_path
             directory (default is True).
 
-        anti_spoofing (boolean): Flag to enable anti spoofing (default is True).
+        anti_spoofing (boolean): Flag to enable anti spoofing (default is False).
 
         credentials (LightDSA or dict): public - private key pair. This will be used to sign
             and verify the integrity of the datastore pickle file. Since pickle files are not safe
@@ -573,7 +573,7 @@ def find_batched(
 
         silent (boolean): Suppress or allow some log messages for a quieter analysis process.
 
-        anti_spoofing (boolean): Flag to enable anti spoofing (default is True).
+        anti_spoofing (boolean): Flag to enable anti spoofing (default is False).
 
         similarity_search (boolean): If False, performs identity verification and returns images of
             the same person. If True, performs similarity search and returns visually similar faces

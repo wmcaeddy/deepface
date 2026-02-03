@@ -63,7 +63,7 @@ def represent(
         normalization (string): Normalize the input image before feeding it to the model.
             Default is base. Options: base, raw, Facenet, Facenet2018, VGGFace, VGGFace2, ArcFace
 
-        anti_spoofing (boolean): Flag to enable anti spoofing (default is True).
+        anti_spoofing (boolean): Flag to enable anti spoofing (default is False).
 
         max_faces (int): Set a limit on the number of faces to be processed (default is None).
 

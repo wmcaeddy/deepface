@@ -52,7 +52,7 @@ def analyze(
         silent (boolean): Suppress or allow some log messages for a quieter analysis process
             (default is False).
 
-        anti_spoofing (boolean): Flag to enable anti spoofing (default is True).
+        anti_spoofing (boolean): Flag to enable anti spoofing (default is False).
 
     Returns:
         results (List[Dict[str, Any]]): A list of dictionaries, where each dictionary represents
