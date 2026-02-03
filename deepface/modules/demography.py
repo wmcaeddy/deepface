@@ -21,7 +21,7 @@ def analyze(
     align: bool = True,
     expand_percentage: int = 0,
     silent: bool = False,
-    anti_spoofing: bool = True,
+    anti_spoofing: bool = False,
 ) -> Union[List[Dict[str, Any]], List[List[Dict[str, Any]]]]:
     """
     Analyze facial attributes such as age, gender, emotion, and race in the provided image.

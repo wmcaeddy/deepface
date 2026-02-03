@@ -34,7 +34,7 @@ def analysis(
     source: int = 0,
     time_threshold: int = 5,
     frame_threshold: int = 5,
-    anti_spoofing: bool = True,
+    anti_spoofing: bool = False,
     output_path: Optional[str] = None,
     debug: bool = False,
 ) -> None:
@@ -352,7 +352,7 @@ def build_demography_models(enable_face_analysis: bool) -> None:
 def highlight_facial_areas(
     img: NDArray[Any],
     faces_coordinates: List[Tuple[int, int, int, int, bool, float]],
-    anti_spoofing: bool = True,
+    anti_spoofing: bool = False,
 ) -> NDArray[Any]:
     """
     Highlight detected faces with rectangles in the given image
@@ -441,7 +441,7 @@ def grab_facial_areas(
     img: NDArray[Any],
     detector_backend: str,
     threshold: int = 130,
-    anti_spoofing: bool = True,
+    anti_spoofing: bool = False,
 ) -> List[Tuple[int, int, int, int, bool, float]]:
     """
     Find facial area coordinates in the given image

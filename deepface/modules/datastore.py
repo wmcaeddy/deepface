@@ -41,7 +41,7 @@ def register(
     l2_normalize: bool = False,
     expand_percentage: int = 0,
     normalization: str = "base",
-    anti_spoofing: bool = True,
+    anti_spoofing: bool = False,
     database_type: str = "postgres",
     connection_details: Optional[Union[Dict[str, Any], str]] = None,
     connection: Any = None,
@@ -146,7 +146,7 @@ def search(
     l2_normalize: bool = False,
     expand_percentage: int = 0,
     normalization: str = "base",
-    anti_spoofing: bool = True,
+    anti_spoofing: bool = False,
     similarity_search: bool = False,
     k: Optional[int] = None,
     database_type: str = "postgres",
@@ -634,7 +634,7 @@ def __get_embeddings(
     l2_normalize: bool = False,
     expand_percentage: int = 0,
     normalization: str = "base",
-    anti_spoofing: bool = True,
+    anti_spoofing: bool = False,
     return_face: bool = True,
 ) -> List[Dict[str, Any]]:
     """
