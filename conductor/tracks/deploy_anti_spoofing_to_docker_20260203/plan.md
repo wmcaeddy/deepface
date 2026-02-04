@@ -2,11 +2,9 @@
 
 This plan outlines the steps to update project dependencies and verify the Docker build process to support the new default anti-spoofing feature.
 
-## Phase 1: Dependency Configuration
+## Phase 1: Dependency Configuration [checkpoint: 53b207f]
 - [x] Task: Update `requirements_local` with pinned CPU versions of PyTorch. (7724b28)
-    - [ ] Add `torch==2.10.0+cpu --index-url https://download.pytorch.org/whl/cpu` to `requirements_local`.
-    - [ ] Add `torchvision==0.25.0+cpu --index-url https://download.pytorch.org/whl/cpu` to `requirements_local`.
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Dependency Configuration' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Dependency Configuration' (Protocol in workflow.md)
 
 ## Phase 2: Docker Build Verification
 - [ ] Task: Execute local Docker build.
