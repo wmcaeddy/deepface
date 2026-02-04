@@ -1,0 +1,100 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.idv
+#1 transferring dockerfile: 1.43kB done
+#1 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 2)
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/node:20-alpine
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.10-slim
+#3 ...
+
+#4 [auth] library/python:pull token for registry-1.docker.io
+#4 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.10-slim
+#3 DONE 2.7s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [build 1/6] FROM docker.io/library/node:20-alpine
+#6 CACHED
+
+#7 [build 2/6] WORKDIR /frontend
+#7 DONE 0.0s
+
+#8 [stage-1  1/15] FROM docker.io/library/python:3.10-slim@sha256:132912d0261aaa84b6f931e640c96943409276d24597a385d081e99f60a25401
+#8 resolve docker.io/library/python:3.10-slim@sha256:132912d0261aaa84b6f931e640c96943409276d24597a385d081e99f60a25401 0.0s done
+#8 sha256:c527c2bded6c6aefb87d87d4077cc9c0c887e878c4712b5f891f4d7f980130cf 1.75kB / 1.75kB done
+#8 sha256:988b1bc8015840dc964d73346946665ad513f8040de02ad5ecae13ce97669d96 5.48kB / 5.48kB done
+#8 sha256:0c8d55a45c0dc58de60579b9cc5b708de9e7957f4591fc7de941b67c7e245da0 0B / 29.78MB 0.1s
+#8 sha256:690eaffcf0e9a6e579bf82062d0d78590bd1bc000a309b8e76ff4ca460bcdb6f 0B / 1.29MB 0.1s
+#8 sha256:d0d1977db48579fff601d66e8aa7525a837b9b23aa7f8e0d3e1de01d8fb6ace6 0B / 13.82MB 0.2s
+#8 sha256:132912d0261aaa84b6f931e640c96943409276d24597a385d081e99f60a25401 10.37kB / 10.37kB done
+#8 sha256:0c8d55a45c0dc58de60579b9cc5b708de9e7957f4591fc7de941b67c7e245da0 6.29MB / 29.78MB 0.7s
+#8 sha256:0c8d55a45c0dc58de60579b9cc5b708de9e7957f4591fc7de941b67c7e245da0 16.78MB / 29.78MB 1.0s
+#8 sha256:690eaffcf0e9a6e579bf82062d0d78590bd1bc000a309b8e76ff4ca460bcdb6f 1.29MB / 1.29MB 0.9s done
+#8 sha256:63ebb7511fc188c7eca8836db8cac7bc37e7d188bd4e5fc617fa0f20979d8a7e 0B / 250B 1.0s
+#8 sha256:0c8d55a45c0dc58de60579b9cc5b708de9e7957f4591fc7de941b67c7e245da0 20.97MB / 29.78MB 1.1s
+#8 sha256:d0d1977db48579fff601d66e8aa7525a837b9b23aa7f8e0d3e1de01d8fb6ace6 3.15MB / 13.82MB 1.1s
+#8 sha256:0c8d55a45c0dc58de60579b9cc5b708de9e7957f4591fc7de941b67c7e245da0 24.12MB / 29.78MB 1.2s
+#8 sha256:d0d1977db48579fff601d66e8aa7525a837b9b23aa7f8e0d3e1de01d8fb6ace6 5.96MB / 13.82MB 1.2s
+#8 sha256:0c8d55a45c0dc58de60579b9cc5b708de9e7957f4591fc7de941b67c7e245da0 29.78MB / 29.78MB 1.4s done
+#8 sha256:d0d1977db48579fff601d66e8aa7525a837b9b23aa7f8e0d3e1de01d8fb6ace6 13.82MB / 13.82MB 1.4s done
+#8 sha256:63ebb7511fc188c7eca8836db8cac7bc37e7d188bd4e5fc617fa0f20979d8a7e 250B / 250B 1.4s done
+#8 extracting sha256:0c8d55a45c0dc58de60579b9cc5b708de9e7957f4591fc7de941b67c7e245da0
+#8 extracting sha256:0c8d55a45c0dc58de60579b9cc5b708de9e7957f4591fc7de941b67c7e245da0 3.6s done
+#8 extracting sha256:690eaffcf0e9a6e579bf82062d0d78590bd1bc000a309b8e76ff4ca460bcdb6f
+#8 extracting sha256:690eaffcf0e9a6e579bf82062d0d78590bd1bc000a309b8e76ff4ca460bcdb6f 0.3s done
+#8 extracting sha256:d0d1977db48579fff601d66e8aa7525a837b9b23aa7f8e0d3e1de01d8fb6ace6
+#8 extracting sha256:d0d1977db48579fff601d66e8aa7525a837b9b23aa7f8e0d3e1de01d8fb6ace6 2.4s done
+#8 extracting sha256:63ebb7511fc188c7eca8836db8cac7bc37e7d188bd4e5fc617fa0f20979d8a7e done
+#8 DONE 8.4s
+
+#9 [internal] load build context
+#9 transferring context: 67.65MB 8.3s
+#9 transferring context: 182.27MB 13.3s
+#9 transferring context: 261.78MB 15.7s done
+#9 DONE 15.8s
+
+#10 [stage-1  2/15] RUN apt-get update && apt-get install -y     ffmpeg     libsm6     libxext6     libhdf5-dev     libgl1     gcc     python3-dev     && rm -rf /var/lib/apt/lists/*
+#10 1.394 Hit:1 http://deb.debian.org/debian trixie InRelease
+#10 1.394 Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+#10 ...
+
+#11 [build 3/6] COPY ./frontend/package*.json ./
+#11 DONE 2.2s
+
+#10 [stage-1  2/15] RUN apt-get update && apt-get install -y     ffmpeg     libsm6     libxext6     libhdf5-dev     libgl1     gcc     python3-dev     && rm -rf /var/lib/apt/lists/*
+#10 ...
+
+#12 [build 4/6] RUN npm ci
+#12 ...
+
+#10 [stage-1  2/15] RUN apt-get update && apt-get install -y     ffmpeg     libsm6     libxext6     libhdf5-dev     libgl1     gcc     python3-dev     && rm -rf /var/lib/apt/lists/*
+#10 31.38 Ign:2 http://deb.debian.org/debian trixie-updates InRelease
+#10 31.49 Hit:3 http://deb.debian.org/debian-security trixie-security InRelease
+#10 32.42 Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+#10 62.45 Ign:2 http://deb.debian.org/debian trixie-updates InRelease
+#10 62.55 Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9670 kB]
+#10 94.48 Ign:4 http://deb.debian.org/debian trixie/main amd64 Packages
+#10 94.58 Get:5 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [98.8 kB]
+#10 125.5 Ign:5 http://deb.debian.org/debian-security trixie-security/main amd64 Packages
+#10 125.6 Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+#10 156.5 Ign:2 http://deb.debian.org/debian trixie-updates InRelease
+#10 156.6 Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9670 kB]
+#10 190.5 Ign:4 http://deb.debian.org/debian trixie/main amd64 Packages
+#10 190.6 Get:5 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [98.8 kB]
+#10 222.6 Ign:5 http://deb.debian.org/debian-security trixie-security/main amd64 Packages
+#10 222.7 Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+#10 254.6 Err:2 http://deb.debian.org/debian trixie-updates InRelease
+#10 254.6   Connection timed out [IP: 199.232.150.132 80]
+#10 254.7 Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9670 kB]
+#10 284.7 Ign:4 http://deb.debian.org/debian trixie/main amd64 Packages
+#10 284.8 Get:5 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [98.8 kB]
+#10 318.7 Ign:5 http://deb.debian.org/debian-security trixie-security/main amd64 Packages
+#10 319.1 Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9670 kB]

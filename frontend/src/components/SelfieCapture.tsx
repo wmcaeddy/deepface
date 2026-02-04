@@ -48,7 +48,7 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
     if (isLoading) {
       const timer = setTimeout(() => {
         setLoadTimeout(true);
-      }, 15000); // 15 seconds timeout
+      }, 5000); // 5 seconds timeout
       return () => clearTimeout(timer);
     } else {
       setLoadTimeout(false);
@@ -131,35 +131,6 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
         Take a Selfie
       </Typography>
 
-      {loadTimeout && !imgSrc && (
-        <Alert severity="warning" sx={{ mb: 2, textAlign: 'left' }}>
-          <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }}>
-            AI Model Loading is taking longer than expected.
-          </Typography>
-          <Typography variant="body2" sx={{ mt: 1 }}>
-            This can happen due to slow network or browser restrictions. You can try to refresh or use manual capture below.
-          </Typography>
-          <Button 
-            variant="outlined" 
-            color="warning" 
-            size="small" 
-            onClick={() => window.location.reload()}
-            sx={{ mt: 1, mr: 1 }}
-          >
-            Refresh Page
-          </Button>
-          <Button 
-            variant="contained" 
-            color="warning" 
-            size="small" 
-            onClick={handleManualCapture}
-            sx={{ mt: 1 }}
-          >
-            Manual Capture
-          </Button>
-        </Alert>
-      )}
-
       {!isSecureContext && (
         <Alert severity="error" sx={{ mb: 2, textAlign: 'left' }}>
           <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>
@@ -216,11 +187,10 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
           justifyContent: 'center'
         }}
       >
-        {isLoading && !imgSrc && (
+        {isLoading && !loadTimeout && !imgSrc && (
           <Box sx={{ position: 'absolute', zIndex: 5, textAlign: 'center', color: 'white' }}>
             <CircularProgress color="inherit" sx={{ mb: 2 }} />
-            <Typography variant="body2">Loading AI Models...</Typography>
-            <Typography variant="caption" sx={{ opacity: 0.7 }}>This may take a moment on the first load</Typography>
+            <Typography variant="body2">Starting Camera...</Typography>
           </Box>
         )}
 
@@ -231,13 +201,14 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
             style={{ width: '100%', borderRadius: '4px' }} 
           />
         ) : (
-          <Box sx={{ position: 'relative', width: '100%', opacity: isLoading ? 0.3 : 1 }}>
+          <Box sx={{ position: 'relative', width: '100%', opacity: (isLoading && !loadTimeout) ? 0.3 : 1 }}>
             <Webcam
               audio={false}
               ref={webcamRef}
               screenshotFormat="image/jpeg"
               videoConstraints={videoConstraints}
               onUserMediaError={handleUserMediaError}
+              mirrored={true}
               style={{ width: '100%', borderRadius: '4px' }}
             />
             {!error && (!isLoading || loadTimeout) && (
@@ -309,10 +280,10 @@ const SelfieCapture: React.FC<SelfieCaptureProps> = ({ onCapture, initialImage }
             color={detected ? "success" : "primary"}
             startIcon={<CameraAltIcon />}
             size="large"
-            disabled={!loadTimeout || isLoading}
-            onClick={handleManualCapture}
+            disabled={(isLoading && !loadTimeout) || !!error}
+            onClick={capture}
           >
-            {isLoading ? "Initializing AI..." : detected ? "Capturing..." : "Waiting for Face..."}
+            {detected && isCapturing ? "Capturing..." : "CAPTURE"}
           </Button>
         )}
       </Box>
